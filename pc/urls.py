@@ -59,4 +59,8 @@ urlpatterns = [
                   path("mem_zixun_shoucang_list/<dijiye>", zixun.mem_zixun_shoucang_list),  # 会员中心-资讯-收藏列表
                   path("mem_zixun_shoucang_del", zixun.mem_zixun_shoucang_del),  # 会员中心-资讯-收藏删除
                   path("mem_zixun_pinglun_list/<dijiye>", zixun.mem_zixun_pinglun_list),  # 会员中心-资讯-评论列表
-                  path("mem_zixun_pinglun_de
+                  path("mem_zixun_pinglun_del", zixun.mem_zixun_pinglun_del),  # 会员中心-资讯-评论删除
+                  path("mem_zixun_liulan_list/<dijiye>", zixun.mem_zixun_liulan_list),  # 会员中心-资讯-浏览记录列表
+                  path("mem_zixun_liulan_del", zixun.mem_zixun_liulan_del)  # 会员中心-资讯-浏览记录删除
+
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

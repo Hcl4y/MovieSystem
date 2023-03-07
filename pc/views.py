@@ -44,7 +44,7 @@ def pc_index(request):
     curson_zixun_pinglun.execute(
         "select  pl.riqi,pl.neirong,xw.id  from xinwen_pinglun as pl,xinwen  as xw  where pl.yn_shenhe=2 and  pl.zixun_id = xw.id order by id desc limit 3 ")
     rows_zixun_pinglun = curson_zixun_pinglun.fetchall()
-    print(rows_zixun_pinglun)
+    # print(rows_zixun_pinglun)
 
     neirong = {
         "ad": info_ad,
@@ -85,7 +85,7 @@ def mem_reg(request):
         curson = connection.cursor()
         curson.execute("select * from huiyuan where shouji='%s' " % shouji)
         info = curson.fetchone()
-        print(info)
+        # print(info)
         neirong = {}
         if info:
             cuowu = "<script>alert('该账号已经注册')</script>"
@@ -115,7 +115,7 @@ def mem_login(request):
         curson = connection.cursor()
         curson.execute("select * from huiyuan where shouji='%s' and mima='%s' " % (shouji, mima))
         info = curson.fetchone()
-        print(info)
+        # print(info)
         neirong = {}
         if info:
             if info[0]:
@@ -146,7 +146,7 @@ def mem_main(request):
     neirong = {
         "info": info
     }
-    print(info)
+    # print(info)
     return render(request, "pc/mem_main.html", context=neirong)
 
 
@@ -173,7 +173,7 @@ def mem_xinxi_xiugai(request):
         neirong = {
             "info": info
         }
-        # print(info)
+        # # print(info)
         return render(request, "pc/mem_xinxi_xiugai.html", context=neirong)
     if request.method == "POST":
         xingming = request.POST.get("xingming")
@@ -204,13 +204,13 @@ def mem_mima(request):
     if request.method == "POST":
         mm1 = request.POST.get("mm1")
         mm2 = request.POST.get("mm2")
-        print(mm1 + "=========" + mm2)
+        # print(mm1 + "=========" + mm2)
 
         # 判断原始密码是否正确
         curson = connection.cursor()
         curson.execute("select * from huiyuan where id=%s and mima='%s' " % (request.COOKIES.get("h_id"), mm1))
         info = curson.fetchone()
-        print(info)
+        # print(info)
 
         if info is None:
             cuowu = "<script>alert('账号错误')</script>"
@@ -257,15 +257,15 @@ def guanyu_liuyan(request):
 
 # 环境图片 列表
 def pc_chanpin_list(request, dijiye, leixing_id):
-    print("第几页=%s" % dijiye)
-    print("当前信息类型id=%s" % leixing_id)
+    # print("第几页=%s" % dijiye)
+    # print("当前信息类型id=%s" % leixing_id)
 
     chaxun = ""
     if request.GET.get("remen") is None:
         chaxun = ""
     else:
         chaxun = request.GET.get("remen")
-    print("查询关键字=%s" % chaxun)
+    # print("查询关键字=%s" % chaxun)
 
     # 读取分类
     curson_fenlei = connection.cursor()
@@ -285,12 +285,12 @@ def pc_chanpin_list(request, dijiye, leixing_id):
 
     cursor_zongshuju.execute(sql_zongshuju)
     zongshuju = cursor_zongshuju.fetchone()[0]
-    print("总的数据= %s 条" % zongshuju)  # 12
+    # print("总的数据= %s 条" % zongshuju)  # 12
 
     meiye = 5
     yeshu = math.ceil(zongshuju / meiye)
-    print("每页数据 =%s 条" % meiye)
-    print("有多少页 =%s " % yeshu)
+    # print("每页数据 =%s 条" % meiye)
+    # print("有多少页 =%s " % yeshu)
 
     cursor = connection.cursor()
     # sql = "select * from xinwen order by id desc limit %s,%s" % (int(meiye) * int(dijiye), meiye)
@@ -304,7 +304,7 @@ def pc_chanpin_list(request, dijiye, leixing_id):
         sql = "select * from cp where xinxi_lxid1=%s order by id desc limit %s,%s" % (
             leixing_id, int(meiye) * int(dijiye), meiye)
 
-    print(sql)
+    # print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
 
@@ -397,7 +397,7 @@ def pc_chanpin_xiangqing(request):
             shang = "<a href=/pc_chanpin_xiangqing?cpid=%s>%s</a>" % (info_shang[0], info_shang[1])
         else:
             shang = "暂无"
-        print(shang)
+        # print(shang)
 
         # 读取下一篇
         xia = ""
@@ -408,7 +408,7 @@ def pc_chanpin_xiangqing(request):
             xia = "<a href=/pc_chanpin_xiangqing?cpid=%s>%s</a>" % (info_xia[0], info_xia[1])
         else:
             xia = "暂无"
-        print(xia)
+        # print(xia)
 
         # 插入阅读记录
         add_riqi = time.strftime("%Y-%m-%d", time.localtime())
@@ -444,7 +444,7 @@ def pc_chanpin_xiangqing(request):
         curson_pinglun_list.execute(
             "select id,neirong,riqi  from cp_pinglun where yn_shenhe=2 and chanpin_id=%s" % cpid)
         rows_pinglun_list = curson_pinglun_list.fetchall()
-        print(rows_pinglun_list)
+        # print(rows_pinglun_list)
 
         # 读取评论数
         shu_pinglun = 0
@@ -470,7 +470,7 @@ def pc_chanpin_xiangqing(request):
 def api_chanpin_shoucang(request):
     chanpin_id = request.GET.get("cpid")
     u_id = request.GET.get("h_id")
-    print("要收藏的产品id=%s,用户id=%s" % (chanpin_id, u_id))
+    # print("要收藏的产品id=%s,用户id=%s" % (chanpin_id, u_id))
 
     # 判断是否收藏，如果没有收藏，则写入数据库
     curson = connection.cursor()
@@ -531,24 +531,24 @@ def mem_zixun_shoucang_del(request):
 # 资讯 收藏 列表
 def mem_zixun_shoucang_list(request, dijiye):
     h_id = request.COOKIES.get("h_id")  # 登录的用户id
-    print("第几页=%s" % dijiye)
+    # print("第几页=%s" % dijiye)
     cursor_zongshuju = connection.cursor()
     sql_zongshuju = "select count(1) from xinwen_shoucang where u_id=%s" % h_id
     cursor_zongshuju.execute(sql_zongshuju)
     zongshuju = cursor_zongshuju.fetchone()[0]
-    print("总的数据= %s 条" % zongshuju)  # 12
+    # print("总的数据= %s 条" % zongshuju)  # 12
 
     meiye = 5
     yeshu = math.ceil(zongshuju / meiye)
 
-    print("每页数据 =%s 条" % meiye)
-    print("有多少页 =%s " % yeshu)
+    # print("每页数据 =%s 条" % meiye)
+    # print("有多少页 =%s " % yeshu)
 
     cursor = connection.cursor()
     sql = "select  sc.id as scid,sc.riqi,xw.id as xwid,xw.xinxi_biaoti from xinwen_shoucang as sc,xinwen as xw " \
           "where sc.zixun_id=xw.id and sc.u_id=%s  order by sc.id desc limit %s,%s" % (
               h_id, int(meiye) * int(dijiye), meiye)
-    print(sql)
+    # print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
 
@@ -615,24 +615,24 @@ def mem_zixun_pinglun_del(request):
 # 资讯 评论 列表
 def mem_zixun_pinglun_list(request, dijiye):
     h_id = request.COOKIES.get("h_id")  # 登录的用户id
-    print("第几页=%s" % dijiye)
+    # print("第几页=%s" % dijiye)
     cursor_zongshuju = connection.cursor()
     sql_zongshuju = "select count(1) from xinwen_pinglun where u_id=%s" % h_id
     cursor_zongshuju.execute(sql_zongshuju)
     zongshuju = cursor_zongshuju.fetchone()[0]
-    print("总的数据= %s 条" % zongshuju)  # 12
+    # print("总的数据= %s 条" % zongshuju)  # 12
 
     meiye = 5
     yeshu = math.ceil(zongshuju / meiye)
 
-    print("每页数据 =%s 条" % meiye)
-    print("有多少页 =%s " % yeshu)
+    # print("每页数据 =%s 条" % meiye)
+    # print("有多少页 =%s " % yeshu)
 
     cursor = connection.cursor()
     sql = "select  pinglun.id as plid,pinglun.riqi,pinglun.neirong,pinglun.yn_shenhe,xw.id as xwid,xw.xinxi_biaoti from xinwen_pinglun as pinglun,xinwen as xw " \
           "where pinglun.zixun_id=xw.id and pinglun.u_id=%s  order by pinglun.id desc limit %s,%s" % (
               h_id, int(meiye) * int(dijiye), meiye)
-    print(sql)
+    # print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
 
@@ -715,24 +715,24 @@ def mem_chanpin_shoucang_del(request):
 # 环境图片 收藏 列表
 def mem_chanpin_shoucang_list(request, dijiye):
     h_id = request.COOKIES.get("h_id")  # 登录的用户id
-    print("第几页=%s" % dijiye)
+    # print("第几页=%s" % dijiye)
     cursor_zongshuju = connection.cursor()
     sql_zongshuju = "select count(1) from cp_shoucang where u_id=%s" % h_id
     cursor_zongshuju.execute(sql_zongshuju)
     zongshuju = cursor_zongshuju.fetchone()[0]
-    print("总的数据= %s 条" % zongshuju)  # 12
+    # print("总的数据= %s 条" % zongshuju)  # 12
 
     meiye = 5
     yeshu = math.ceil(zongshuju / meiye)
 
-    print("每页数据 =%s 条" % meiye)
-    print("有多少页 =%s " % yeshu)
+    # print("每页数据 =%s 条" % meiye)
+    # print("有多少页 =%s " % yeshu)
 
     cursor = connection.cursor()
     sql = "select  sc.id as scid,sc.riqi,cp.id as cpid,cp.xinxi_biaoti from cp_shoucang as sc,cp as cp " \
           "where sc.chanpin_id=cp.id and sc.u_id=%s  order by sc.id desc limit %s,%s" % (
               h_id, int(meiye) * int(dijiye), meiye)
-    print(sql)
+    # print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
 
@@ -799,24 +799,24 @@ def mem_chanpin_pinglun_del(request):
 # 环境图片 评论 列表
 def mem_chanpin_pinglun_list(request, dijiye):
     h_id = request.COOKIES.get("h_id")  # 登录的用户id
-    print("第几页=%s" % dijiye)
+    # print("第几页=%s" % dijiye)
     cursor_zongshuju = connection.cursor()
     sql_zongshuju = "select count(1) from cp_pinglun where u_id=%s" % h_id
     cursor_zongshuju.execute(sql_zongshuju)
     zongshuju = cursor_zongshuju.fetchone()[0]
-    print("总的数据= %s 条" % zongshuju)  # 12
+    # print("总的数据= %s 条" % zongshuju)  # 12
 
     meiye = 5
     yeshu = math.ceil(zongshuju / meiye)
 
-    print("每页数据 =%s 条" % meiye)
-    print("有多少页 =%s " % yeshu)
+    # print("每页数据 =%s 条" % meiye)
+    # print("有多少页 =%s " % yeshu)
 
     cursor = connection.cursor()
     sql = "select  pinglun.id as plid,pinglun.riqi,pinglun.neirong,pinglun.yn_shenhe,cp.id as xwid,cp.xinxi_biaoti from cp_pinglun as pinglun,cp as cp " \
           "where pinglun.chanpin_id=cp.id and pinglun.u_id=%s  order by pinglun.id desc limit %s,%s" % (
               h_id, int(meiye) * int(dijiye), meiye)
-    print(sql)
+    # print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
 
