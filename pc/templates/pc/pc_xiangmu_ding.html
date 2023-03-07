@@ -1,0 +1,269 @@
+{% load static %}
+<html>
+<head>
+    <title>{{ myweb_key.1 }}</title>
+    <link rel="stylesheet" href="/static/css/top.css">
+    <link rel="stylesheet" href="/static/css/end.css">
+    <link rel="stylesheet" href="/static/css/huiyuan_mima.css">
+    <link rel="stylesheet" href="/static/css/huiyuan.css">
+    <style>
+        .rongqi{ width:980px;display:flex;flex-wrap:wrap;align-content:flex-start;}
+        .xm{  height:120px; background-color:#FFF;padding:10px; box-sizing:border-box; margin:10px 20px 10px 0px; background:#F3F3F3; border-radius:5px;}
+        .xm:active {
+        }
+        .xm:hover {
+            box-shadow: 5px 5px 10px  #CCCCCC;
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcb48', endColorstr='#ff9c23',GradientType=0 );
+        }
+    </style>
+</head>
+<body>
+{% include "pc/toubu.html" %}
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <!--中间宽度1200 表格 开始-->
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <!--中间宽度1200 左侧200 开始-->
+                        {% include "pc/guanyu_left.html" %}
+                        <!--中间宽度1200 左侧200 结束-->
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+                        <!--中间宽度1200 右侧 开始-->
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    当前电影：{{ info.2 }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+                                
+                           
+
+
+
+<form method="post" name="form1" action="">
+				<table width="100%" border="0" cellspacing="1" cellpadding="10" bgcolor="#CCCCCC" >
+                  <tr>
+                    <td width="17%" bgcolor="#FFFFFF" align="center" style="padding:10px;">日期场次</td>
+                    <td width="83%" bgcolor="#FFFFFF" style="padding:10px; line-height: 2;">
+					    {% for mulu1 in rows_mulu1 %}
+                            {{ mulu1.1 }}场次安排：
+                                  {% for mulu2 in rows_mulu2 %}
+                                  {% if mulu2.2 == mulu1.0 %}
+                                        <a href="pc_xiangmu_ding?xiangmu_id={{ xiangmu_id }}&changci_id={{ mulu2.0 }}"
+                                            {% if changci_id %}
+                                                {% if  mulu2.0 == changci_id %}
+                                                    class="changci changci_xuanzhe"
+                                                 {% else %}
+                                                    class="changci 1"
+                                                {% endif %}
+                                            {% else %}
+                                                 class="changci 2"
+                                            {% endif %}
+                                        >
+                                        {{ mulu2.1 }}
+                                        </a>
+                                  {% endif %}
+                                  {% endfor %}
+                                   <br>
+                        {% endfor %}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td bgcolor="#FFFFFF" align="center" style="padding:10px;">参考信息</td>
+                    <td bgcolor="#FFFFFF" style="padding:10px;">
+                        {% if info_changci %}
+                            放映：{{ info_changci.10 }} 号影厅 |  每排：{{ info_changci.11 }}位置 | 总：{{ info_changci.12 }} 排  | 总计：{{ info_changci.13 }} 座位
+                        {% endif %}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td bgcolor="#FFFFFF" align="center" style="padding:10px;">选择座位</td>
+                    <td bgcolor="#FFFFFF" style="padding:10px;">
+
+{#{% for i in '0123456789'|make_list %}#}
+{#    {{ forloop.counter }}#}
+{#{% endfor %}#}
+
+{# {% for o in ''|rjust:info_changci.12 %}#}
+{#    {{ forloop.counter }}#}
+{#{% endfor %}                    #}
+
+{% if info_changci %}
+<view class="zuowei">
+    {% for x in ''|rjust:info_changci.11 %}
+    <div  class="zuowei_list">
+         {% for y in ''|rjust:info_changci.12 %}
+
+{#             {% if  '1排1号' in zuoweis_yigou  %}#}
+            {% with forloop.counter|stringformat:"s" as tmpa  %}
+            {% with forloop.parentloop.counter|stringformat:"s" as tmpb  %}
+            {% with tmpa|add:"排"|add:tmpb|add:"号" as tmpaa %}
+
+
+{#             {% if "{{ forloop.counter }}排{{ forloop.parentloop.counter }}号" in zuoweis_yigou  %}#}
+             {% if tmpaa in zuoweis_yigou  %}
+                  <input type="checkbox" class="zuowei_list2"  disabled  checked></input>
+                  {{ forloop.counter }}排{{ forloop.parentloop.counter }}号
+             {% else %}
+                  <input type="checkbox" class="zuowei_list2" name="zuowei_id" id="zuowei_id" onChange="xuanzhe();"
+                         value="{{ forloop.counter }}排{{ forloop.parentloop.counter }}号" ></input>
+                 {{ forloop.counter }}排{{ forloop.parentloop.counter }}号
+             {% endif %}
+
+
+            {% endwith %}
+            {% endwith %}
+            {% endwith %}
+
+
+
+         {% endfor %}
+    </div>
+    {% endfor %}
+</view>
+{% endif %}
+
+<style>
+.changci{ background-color: #F0F0F0; padding:3px; border-radius:5px; margin:5px;}
+.changci_xuanzhe{ background-color:#F30; color:#FFF;}
+.zuowei{ display: flex;flex-wrap: wrap;font-size: 11px;}
+.zuowei_list{
+    width:10%;
+    padding: 5px 0 0  0; 
+    box-sizing: border-box;
+    text-align: center;
+    background-color: gainsboro;
+    border-radius: 5px;
+    border:3px solid white;
+}
+.zuowei_list2{
+  width:100%;
+  height: 30px;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: gainsboro;
+  border-radius: 5px;
+  border:3px solid white;
+}
+.zuowei_xuanzhong{
+  background-color: orangered;
+  color: white;
+}	
+</style>              
+
+                    
+                    
+                    </td>
+                  </tr>      
+
+                  <tr>
+                    <td bgcolor="#FFFFFF" align="center" style="padding:10px;">当前选择</td>
+                    <td bgcolor="#FFFFFF" style="padding:10px;">
+                        单价: {{ info.3 }} 元 &nbsp;&nbsp;|&nbsp;&nbsp;
+                        票数：<span id="piaoshu">0</span> 张 &nbsp;&nbsp;|&nbsp;&nbsp;
+                        合计：<span id="feiyong">0</span> 元 &nbsp;&nbsp;|&nbsp;&nbsp;
+                        日期: {{ info_changci.9 }} &nbsp;&nbsp;|&nbsp;&nbsp;
+                        场次：{{ info_changci.1 }}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td bgcolor="#FFFFFF">&nbsp;</td>
+                    <td bgcolor="#FFFFFF" style="padding:10px;">
+                         <input  type="button"   value=" 提交购票信息 "  onClick="return checkinfo();" >
+    <!--选择座位，计算-->
+    <script>
+    function xuanzhe()
+    {
+        //alert("开始选择座位");
+		var piaoshu = 0;
+		var obj = document.getElementsByName("zuowei_id");
+		var check_val = [];
+		for (var i = 0; i < obj.length; i++) 
+		{
+			if (obj[i].checked) {
+				check_val.push(obj[i].value);
+				piaoshu = piaoshu + 1;
+			}
+		}
+		document.getElementById("piaoshu").innerHTML = piaoshu;
+		document.getElementById("feiyong").innerHTML = piaoshu*{{ info.3 }};
+    }
+    function checkinfo()
+    {
+		var piaoshu = 0;
+		var feiyong = 0;
+		var obj = document.getElementsByName("zuowei_id");
+		var check_val = [];
+		for (var i = 0; i < obj.length; i++)
+		{
+			if (obj[i].checked) {
+				check_val.push(obj[i].value);
+				piaoshu = piaoshu + 1;
+			}
+		}
+		if(check_val==""){
+			alert("请选择座位！");
+		}else{
+		    //alert(check_val);
+		    feiyong = piaoshu*{{ info.3 }};
+		    var myurl = "";
+			myurl = myurl + "/api_xiangmu_ding_add";
+			myurl = myurl + "?u_id={{ h_id }}";
+			myurl = myurl + "&xiangmu_id={{ info.0 }}";
+			myurl = myurl + "&xiangmu_mc={{ info.2 }}";
+            myurl = myurl + "&jiage={{ info.3 }}";
+
+			myurl = myurl + "&yuyue_riqi={{ info_changci.9 }}"; //预约日期
+			myurl = myurl + "&yuyue_riqiid={{ info_changci.8 }}"; //预约日期id
+
+			myurl = myurl + "&yuyue_changci={{ info_changci.1 }}";
+			myurl = myurl + "&yuyue_changciid={{ info_changci.0 }}";
+
+			myurl = myurl + "&yuyue_zuoweis="+check_val; //预约座位id集合
+			myurl = myurl + "&yuyue_piaoshu="+piaoshu;
+			myurl = myurl + "&yuyue_feiyong="+feiyong;
+
+			frm01.location = myurl;
+			//alert(myurl);
+        }
+
+    }
+    </script>	
+    <iframe name="frm01" src="" width="0" height="0" frameborder="0"></iframe> 
+                         
+                    </td>
+                  </tr>
+                </table>
+</form>
+                
+                
+                
+
+
+                                </td>
+                            </tr>
+                        </table>
+                        <!--中间宽度1200 右侧 结束-->
+                    </td>
+                </tr>
+            </table>
+            <!--中间宽度1200 表格 结尾-->
+        </td>
+    </tr>
+</table>
+
+{% include "pc/weibu.html" %}
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.STYLE1 {font-size: 12px}
+.STYLE3 {font-size: 12px; font-weight: bold; }
+.STYLE4 {
+	color: #03515d;
+	font-size: 12px;
+}
+-->
+</style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="30" background="../../static/tab/images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="30"><img src="../../static/tab/images/tab_03.gif" width="12" height="30" /></td>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="5%"><div align="center"><img src="../../static/tab/images/tb.gif" width="16" height="16" /></div></td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[菜单管理]-[3级菜单]</td>
+              </tr>
+            </table></td>
+            <td width="54%">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="16"><img src="../../static/tab/images/tab_07.gif" width="16" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="8" background="../../static/tab/images/tab_12.gif">&nbsp;</td>
+        <td height="300" valign="top">
+
+
+
+
+        <!---2级菜单功能-开始-->
+        <table width="99%" border="0" cellspacing="0" cellpadding="5"   align="center">
+            <tr>
+                <td width="15%" valign="top">
+                    <!--输出1级分类，供选择-开始(左侧)-->
+                    <script>
+                        function change01(){
+                            v1 = document.getElementById("st1").value;
+                            if(v1!=""){
+                                window.location="?id_1ji=" + v1;
+                            }else{
+                                document.getElementById("st1").selectedIndex = 0;
+                            }
+                        }
+                        //var jmpURL=this.options[this.selectedIndex].value ; if(jmpURL!='') {window.location='?id_1ji='+jmpURL;} else {this.selectedIndex=0 ;}" >
+
+                    </script>
+                    <select name="st1" id="st1"  size="1"  onchange="change01()" >
+                        <option value="0">请选择1级分类</option>
+                        <!-- 表：0-id    1-caidan_mingcheng   2-caidan_lujing   3-caidan_jibie   4-caidan_suoshu   5-paixu_id-->
+                        {% for caidan_1ji in caidan_1jis %}
+                          <option   value="{{ caidan_1ji.0 }}"  >
+                               {{ caidan_1ji.0 }} --- {{ caidan_1ji.1 }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <td width="10%" style="" valign="middle">
+                    ------>
+                </td>
+
+
+                <td width="70%" style="" valign="top">
+                    <!--输出2级分类，供选择-开始(左侧)-->
+{#                    id_1ji = {{ id_1ji }} <br>#}
+                    <select name="st2" id="st2"  size="1"  onchange="get_menu3()">
+                       <option   value="0"  >请选择分类</option>
+{#                        <option value="0">请选择2级分类</option>#}
+                        <!-- 表：0-id    1-caidan_mingcheng   2-caidan_lujing   3-caidan_jibie   4-caidan_suoshu   5-paixu_id-->
+                        {% for caidan_2ji in caidan_2jis %}
+                          <option   value="{{ caidan_2ji.0 }}"  >
+                               {{ caidan_2ji.0 }} --- {{ caidan_2ji.1 }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <script>
+                        function get_menu3(){
+                            id2 = document.getElementById("st2").value;
+                            //alert("{{ id_1ji }} | " + id2)
+                            url = "/ht_caidan_3ji_iframe?id_2ji=" + id2;
+                            //alert(url);
+                            //document.getElementById("iframe3").src = url;
+                            //document.getElementById("iframe2").src = "/ht_caidan_3ji_iframe?id_2ji=327"
+                            iframe3.location = url;
+                        }
+                    </script>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="3">
+                   <iframe  style="width:99%; border: 0;"  name="iframe3" id="iframe3" src=""  height="500" ></iframe>
+                </td>
+            </tr>
+        </table>
+
+        <script type="text/javascript">
+            //alert("111");  //选中项目
+            var selectval= {{ id_1ji }};
+            var selectid = document.getElementById("st1");
+            for(i=0;i<selectid.length;i++){
+                if(selectid[i].value==selectval)
+                    selectid[i].selected = true;
+                    //document.getElementById("iframe2").src = "/ht_caidan_2ji_iframe?id_1ji={{ id_1ji }}"
+            }
+        </script>
+        
+        </td>
+        <td width="8" background="../../static/tab/images/tab_15.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="35" background="../../static/tab/images/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="35"><img src="../../static/tab/images/tab_18.gif" width="12" height="35" /></td>
+        <td>黄菊华老师QQ（微信同号）：45157718</td>
+        <td width="16"><img src="../../static/tab/images/tab_20.gif" width="16" height="35" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>

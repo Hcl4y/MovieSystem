@@ -1,0 +1,233 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ myweb_key.1 }}</title>
+	<link rel="stylesheet" href="/static/css/index.css">
+	<link rel="stylesheet" type="text/css" href="/static/css2/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css2/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/css2/entypo.css">
+    <style>
+        .rongqi{ width:980px;display:flex;flex-wrap:wrap;align-content:flex-start;}
+        .xm{  height:120px; background-color:#FFF;padding:10px; box-sizing:border-box; margin:10px 20px 10px 0px; background:#F3F3F3; border-radius:5px;}
+        .xm:active {
+        }
+        .xm:hover {
+            box-shadow: 5px 5px 10px  #CCCCCC;
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcb48', endColorstr='#ff9c23',GradientType=0 );
+        }
+    </style>
+</head>
+<body>
+
+
+{% include "pc/toubu.html" %}
+
+
+<!--中间内容 开始-->
+<!--图片广告 开始-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td bgcolor="#666666">&nbsp;</td>
+        <td width="1200">
+            <div class='o-sliderContainer' id="pbSliderWrap0" style="margin-top:0;">
+
+                <div class='o-slider' id='pbSlider0'>
+
+                    <a href="{{ ad.3 }}" class="o-slider--item" data-image="{{ ad.2 }}" target="_blank">
+                        <div class="o-slider-textWrap">
+                            <h2 class="o-slider-subTitle"></h2>
+                        </div>
+                    </a>
+
+                    <a href="{{ ad.6 }}" class="o-slider--item" data-image="{{ ad.5 }}"  target="_blank">
+                        <div class="o-slider-textWrap">
+                            <h2 class="o-slider-subTitle"></h2>
+                        </div>
+                    </a>
+
+                    <a  href="{{ ad.9 }}" class="o-slider--item" data-image="{{ ad.8 }}"  target="_blank">
+                        <div class="o-slider-textWrap">
+                            <h2 class="o-slider-subTitle"></h2>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </td>
+        <td bgcolor="#666666">&nbsp;</td>
+    </tr>
+</table>
+<!--图片广告 结束-->
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr><td align="center">
+
+        <table width="1200" border="0" cellspacing="0" cellpadding="0" align="center" style="border:1px solid #CCC;" >
+            <tr>
+                <td width="850" style="padding:5px;display:flex; flex-wrap: wrap;" valign="top"  >
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                        <tr>
+                            <td  height="35">最新上架推荐商品</td>
+                            <td align="right" ><a href="pc_shop_chaxun_list.php" target="_blank">所有商品>></a></td>
+                        </tr>
+                        <tr><td  height="3" colspan="2"  bgcolor="#333333"></td></tr>
+                        <tr><td  height="5" colspan="2" style="padding:10px 0 5px;">
+                            <!--最新上架环境-->
+                            <div class="cp_zuixin"> {#id,mingcheng,cp_tupian,jiage1#}
+                                {% for sp_zuixin in rows_sp_zuixin %}
+                                <a href="sp_xinxi?id={{ sp_zuixin.0 }}"  class="cp_lianjie" target="_blank">
+                                    <img  src="/{{ sp_zuixin.2 }}" class="cp_img" />
+                                    <p class="cp_mc">{{ sp_zuixin.1 }}</p>
+                                    <p class="cp_mc2">¥ {{ sp_zuixin.3 }}</p>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </td>
+                        </tr>
+                    </table>
+
+                </td>
+                <td width="5"></td>
+                <td width="345" style="padding:5px;" valign="top" height="250">
+
+
+                    <table width="95%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                        <tr>
+                            <td  height="35">最新资讯</td>
+                            <td align="right" ></td>
+                        </tr>
+                        <tr><td  height="3" colspan="2"  bgcolor="#333333"></td></tr>
+                        {% for xinwen in rows_xinwen %}
+                        <tr>
+                            <td  height="5" colspan="2" style="padding:9px 0 ; border-bottom:1px dotted #CCCCCC;">
+                                <span  style="color:#999;">[{{ xinwen.2|date:"Y-d-m" }}]</span>
+                                <a href="/xinxi_xiangqing?zxid={{ xinwen.0 }}" style="color: #333; " target="_blank">
+                                    {{ xinwen.1 }}
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+
+                </td>
+            </tr>
+        </table>
+
+    </td></tr>
+</table>
+
+<!--中间内容 开始-->
+<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr><td align="center">
+
+    {% for shop_fenlei in rows_shop_fenlei %}
+        <!--中间宽度1200表格 开始-->
+        <table width="1200" border="0" cellspacing="0" cellpadding="0" align="center" style="border:1px solid #CCC;" >
+            <tr>
+                <!--中间宽度1200表格 左侧开始-->
+                <td width="345" style="padding:5px;" valign="top" height="250">
+                    <!--左侧 内容开始-->
+                    <table width="95%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                        <tr>
+                            <td  height="35"> {{ shop_fenlei.1 }}-推荐商品</td>
+                            <td align="right" ></td>
+                        </tr>
+                        <tr><td  height="3" colspan="2"  bgcolor="#333333"></td></tr>
+
+                        {% for sp in sps %}
+                            {% if shop_fenlei.0 == sp.1 %}
+                            <tr><!--id,lx_id1,mingcheng,cp_tupian,jiage1-->
+                                <td  height="5" colspan="2" style="padding:9px 0 ; border-bottom:1px dotted #CCCCCC;">
+                                    <a href="sp_xinxi?id={{ sp.0 }}" style="color: #333; " target="_blank">
+                                        {{ sp.2 }}（价格：<span  style="color:red;">¥ {{ sp.4 }}</span>）
+                                    </a>
+                                </td>
+                            </tr>
+                            {%  endif %}
+                       {% endfor %}
+
+                    </table>
+                    <!--左侧 内容结束-->
+                </td>
+                <!--中间宽度1200表格 左侧结束-->
+                <td width="5"></td> <!--中间宽度1200表格 中间空格-->
+                <!--中间宽度1200表格 右侧开始-->
+                <td width="850" style="padding:5px;display:flex; flex-wrap: wrap;" valign="top"  >
+                    <!--右侧 内容开始-->
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
+                        <tr>
+                            <td  height="35">{{ shop_fenlei.1 }}</td>
+                            <td align="right" ><a href="pc_shop_fenlei_list.php?cs_lxid=<?php echo $jibie1_id?>&cs_lxmf=<?php echo $jibie1_mc?>" target="_blank">更多>></a></td>
+                        </tr>
+                        <tr><td  height="3" colspan="2"  bgcolor="#333333"></td></tr>
+                        <tr><td  height="5" colspan="2" style="padding:10px 0 10px;">
+                            <!--最新上架环境--><!--id,lx_id1,mingcheng,cp_tupian,jiage1-->
+                            <div class="cp_zuixin">
+                            {% for sp in sps2 %}
+                            {% if shop_fenlei.0 == sp.1 %}
+                                <a href="sp_xinxi?id={{ sp.0 }}"  class="cp_lianjie" target="_blank">
+                                <img  src="{{ sp.3 }}" class="cp_img" />
+                                <p class="cp_mc">{{ sp.2 }}</p>
+                                <p class="cp_mc2">¥ {{ sp.4 }}</p>
+                                </a>
+                            {%  endif %}
+                            {% endfor %}
+                            </div>
+                        </td>
+                        </tr>
+                    </table>
+                    <!--右侧 内容结束-->
+                </td>
+                <!--中间宽度1200表格 右侧结束-->
+            </tr>
+        </table>
+        <!--中间宽度1200表格 结束-->
+
+    {% endfor %}
+    </td></tr>
+</table>
+<!--中间内容 结束-->
+
+
+{% include "pc/weibu.html" %}
+
+
+<script src="/static/js2/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src='/static/js2/hammer.min.js'></script>
+<script src='/static/js2/slider.js'></script>
+<script>
+    $('#pbSlider0').pbTouchSlider({
+        slider_Wrap: '#pbSliderWrap0',
+        slider_Threshold: 10,
+        slider_Speed:600,
+        slider_Ease:'ease-out',
+        slider_Drag : true,
+        slider_Arrows: {
+            enabled : true
+        },
+        slider_Dots: {
+            class :'.o-slider-pagination',
+            enabled : true
+        },
+        slider_Breakpoints: {
+            default: {
+                height: 200
+            },
+            tablet: {
+                height: 150,
+                media: 1024
+            },
+            smartphone: {
+                height: 150,
+                media: 768
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

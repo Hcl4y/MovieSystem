@@ -1,0 +1,73 @@
+{% load static %}
+<html>
+<head>
+    <title>{{ myweb_key.1 }}</title>
+    <link rel="stylesheet" href="/static/css/top.css">
+    <link rel="stylesheet" href="/static/css/end.css">
+    <link rel="stylesheet" href="/static/css/huiyuan_mima.css">
+    <link rel="stylesheet" href="/static/css/huiyuan.css">
+    <link rel="stylesheet" href="/static/css/huiyuan_shoucang.css">
+</head>
+<body>
+{% include "pc/toubu.html" %}
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <!--中间宽度1200 表格 开始-->
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <!--中间宽度1200 左侧200 开始-->
+                        {% include "pc/mem_left.html" %}
+                        <!--中间宽度1200 左侧200 结束-->
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+                        <!--中间宽度1200 右侧 开始-->
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    我的收藏
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+
+
+{## 0-id,1-cpid  2-mingcheng,3-jiage1,4-kucun,5-yixiaoshou,6-cp_tupian#}
+{% for sp in sps %}
+    <div class="shoucang">
+        <div class="shoucang_zuo">
+            <img src="{{ sp.6 }}" class="shoucang_zuo_img" />
+        </div>
+        <div class="shoucang_zhong">
+            <div class="shoucang_zhong_txt1">
+                {{ sp.2 }}
+            </div>
+            <div class="shoucang_zhong_txt2">库存：{{ sp.4 }} | 已销售：{{ sp.5 }}</div>
+            <div class="shoucang_zhong_txt3">单价：{{ sp.3 }}</div>
+        </div>
+        <a class="shoucang_you" href="/mem_shoucang_del?id={{ sp.0 }}">
+            <img src="/static/img/del.png"  class="shoucang_you_img" />
+        </a>
+    </div>
+{% endfor %}
+
+
+                                </td>
+                            </tr>
+                        </table>
+                        <!--中间宽度1200 右侧 结束-->
+                    </td>
+                </tr>
+            </table>
+            <!--中间宽度1200 表格 结尾-->
+        </td>
+    </tr>
+</table>
+
+{% include "pc/weibu.html" %}
+
+</body>
+</html>

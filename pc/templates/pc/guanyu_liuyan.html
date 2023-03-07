@@ -1,0 +1,132 @@
+{% load static %}
+<html>
+<head>
+    <title>{{ myweb_key.1 }}</title>
+    <link rel="stylesheet" href="/static/css/top.css">
+    <link rel="stylesheet" href="/static/css/end.css">
+    <link rel="stylesheet" href="/static/css/huiyuan_mima.css">
+    <link rel="stylesheet" href="/static/css/huiyuan.css">
+    <style>
+        .rongqi{ width:980px;display:flex;flex-wrap:wrap;align-content:flex-start;}
+        .xm{  height:120px; background-color:#FFF;padding:10px; box-sizing:border-box; margin:10px 20px 10px 0px; background:#F3F3F3; border-radius:5px;}
+        .xm:active {
+        }
+        .xm:hover {
+            box-shadow: 5px 5px 10px  #CCCCCC;
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcb48', endColorstr='#ff9c23',GradientType=0 );
+        }
+    </style>
+</head>
+<body>
+{% include "pc/toubu.html" %}
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <!--中间宽度1200 表格 开始-->
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <!--中间宽度1200 左侧200 开始-->
+                        {% include "pc/guanyu_left.html" %}
+                        <!--中间宽度1200 左侧200 结束-->
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+                        <!--中间宽度1200 右侧 开始-->
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    留言反馈
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+
+                                    <form name="form_liuyan" method="post" action="">
+                                        <table width="100%"  border="0" align="center" cellpadding="3" cellspacing="1" bordercolor="#FEF5F8" bgcolor="#DFFEDA">
+                                            <tr>
+                                                <td height="30" colspan="2"   bgcolor="#DFFEDA" align="center" >
+                                                    <font color="black">&nbsp; </font> <font color="#FF0000">欢迎对我<a name="liuyan_a"></a>们提出意见、建议，我们会认真答复！ </font>
+                                                    {{ cuowu|safe }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="30" align="center" bgcolor="#FFFFFF"><font color="black">留言主题 </font></td>
+                                                <td align="left" bgcolor="#FFFFFF"><input type="text" name="zhuti" size="50" class="inputstyle250">
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="12%" height="30" align="center" bgcolor="#FFFFFF"><font color="black">联 系 人</font></td>
+                                                <td width="88%" align="left" bgcolor="#FFFFFF"> <input name="xingming" type="text" value=""  class="inputstyle250" >
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="30" align="center" bgcolor="#FFFFFF"><font color="black">联系电话</font> </td>
+                                                <td align="left" bgcolor="#FFFFFF"><input name="dianhua" type="text" value="" class="inputstyle250">
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="30" align="center" bgcolor="#FFFFFF"><font color="black">联系邮箱</font> </td>
+                                                <td align="left" bgcolor="#FFFFFF"><input name="youxiang" type="text" value="" class="inputstyle250">
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td  align="center" bgcolor="#FFFFFF"><font color="black">留言内容</font></td>
+                                                <td  align="left" valign="middle" bgcolor="#FFFFFF">
+                                                    <textarea name="neirong" cols="50" rows="4" class="inputstyle4" style="height:100px; ">这里填写详细阐述</textarea>
+                                                    <font color="#FF0000">*</font></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" height="35" bgcolor="#FFFFFF">&nbsp;</td>
+                                                <td align="left" bgcolor="#FFFFFF">
+                                                    <input type="submit"  value="提交留言信息" onClick="return checkinfo();" class="ANNIU">
+                                                    <script language="javascript">
+                                                        function checkinfo()
+                                                        {
+                                                            if(document.form_liuyan.zhuti.value=="")
+                                                            {
+                                                                document.form_liuyan.zhuti.focus();
+                                                                alert("对不起，请填写留言主题！");
+                                                                return false;
+                                                            }
+
+                                                            if(document.form_liuyan.xingming.value=="")
+                                                            {
+                                                                document.form_liuyan.xingming.focus();
+                                                                alert("对不起，请填写留言联系人！");
+                                                                return false;
+                                                            }
+
+                                                            if(document.form_liuyan.dianhua.value=="")
+                                                            {
+                                                                document.form_liuyan.dianhua.focus();
+                                                                alert("对不起，请填写留言联系电话！");
+                                                                return false;
+                                                            }
+
+                                                        }
+                                                    </script></td>
+                                            </tr>
+                                        </table>
+                                    </form>
+
+
+                                </td>
+                            </tr>
+                        </table>
+                        <!--中间宽度1200 右侧 结束-->
+                    </td>
+                </tr>
+            </table>
+            <!--中间宽度1200 表格 结尾-->
+        </td>
+    </tr>
+</table>
+
+{% include "pc/weibu.html" %}
+
+</body>
+</html>

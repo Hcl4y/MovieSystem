@@ -1,0 +1,25 @@
+@charset "utf-8";
+.weibu{
+	border-bottom: 1px solid #DBDBDB; padding: 5px;
+	display: flex;
+	background: #000000;
+}
+.weibu_1200{
+	width: 1200px;
+	margin: auto;
+	display: flex;
+}
+.weibu_you{
+	color: white;
+	margin: auto;
+}
+.weibu2{
+	display: flex;
+	background:  #FFFFFF;
+}
+.weibu2_1200{
+	width: 1200px;
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+}

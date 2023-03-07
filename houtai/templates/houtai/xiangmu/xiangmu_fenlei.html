@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.STYLE1 {font-size: 12px}
+.STYLE3 {font-size: 12px; font-weight: bold; }
+.STYLE4 {
+	color: #03515d;
+	font-size: 12px;
+}
+-->
+</style>
+
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="30" background="../../static/tab/images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="30"><img src="../../static/tab/images/tab_03.gif" width="12" height="30" /></td>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="5%"><div align="center"><img src="../../static/tab/images/tb.gif" width="16" height="16" /></div></td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[分类设置]</td>
+              </tr>
+            </table></td>
+            <td width="54%">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="16"><img src="../../static/tab/images/tab_07.gif" width="16" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="8" background="../../static/tab/images/tab_12.gif">&nbsp;</td>
+        <td height="300" valign="top">
+
+
+{#            {{ id_1ji }}#}
+{#            {% if id_1ji %}#}
+{#                修改#}
+{#            {% else %}#}
+{#                录入#}
+{#            {% endif %}#}
+
+
+            {% if id_1ji %}
+{#                {{ caidan_info }}#}
+                <!-- 表：0-id    1-caidan_mingcheng   2-caidan_lujing   3-caidan_jibie   4-caidan_suoshu   5-paixu_id-->
+                <form action="" method="post">
+                <table width="100%">
+                    <tr>
+                        <td style="background-color: gainsboro;padding: 5px;">
+                            分类名称
+                            <input type="text" name="caidan_mingcheng" size="20" value="{{ caidan_info.1 }}" />
+                            排序id
+                            <input type="text" name="paixu_id" size="5" value="{{ caidan_info.2 }}" />
+                            <input type="submit" value="修改"> （排序id越大排序在前面）
+                            <input type="hidden" name="id_1ji" value="{{ id_1ji }}" />
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            {% else %}
+                <form action="" method="post">
+                <table width="100%">
+                    <tr>
+                        <td style="background-color: gainsboro;padding: 5px;">
+                            分类名称
+                            <input type="text" name="caidan_mingcheng" size="20" />
+                            排序id
+                            <input type="text" name="paixu_id" size="5"  value="1"/>
+                            <input type="submit" value="录入"> （排序id越大排序在前面）
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            {% endif %}
+
+
+            <table width="100%">
+                    <tr>
+                        <td width="40%"><b>分类名称</b></td>
+                        <td width="20%"><b>排序ID</b></td>
+                        <td width="40%"></td>
+                    </tr>
+                <!-- 表：0-id    1-caidan_mingcheng   2-caidan_lujing   3-caidan_jibie   4-caidan_suoshu   5-paixu_id-->
+                {% for caidan_1ji in caidan_1jis %}
+                    <tr>
+                        <td>{{ caidan_1ji.1 }}</td>
+                        <td>{{ caidan_1ji.2 }}</td>
+                        <td >
+                            <a href="/xiangmu_fenlei?id_1ji={{ caidan_1ji.0 }}">修改</a> |
+                            <a href="/xiangmu_fenlei_del?id_1ji={{ caidan_1ji.0 }}">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+        </td>
+        <td width="8" background="../../static/tab/images/tab_15.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="35" background="../../static/tab/images/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="35"><img src="../../static/tab/images/tab_18.gif" width="12" height="35" /></td>
+        <td>黄菊华老师QQ（微信同号）：45157718</td>
+        <td width="16"><img src="../../static/tab/images/tab_20.gif" width="16" height="35" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.STYLE1 {font-size: 12px}
+.STYLE3 {font-size: 12px; font-weight: bold; }
+.STYLE4 {
+	color: #03515d;
+	font-size: 12px;
+}
+-->
+</style>
+
+<script>
+var  highlightcolor='#c1ebff';
+//此处clickcolor只能用win系统颜色代码才能成功,如果用#xxxxxx的代码就不行,还没搞清楚为什么:(
+var  clickcolor='#51b2f6';
+function  changeto(){
+source=event.srcElement;
+if  (source.tagName=="TR"||source.tagName=="TABLE")
+return;
+while(source.tagName!="TD")
+source=source.parentElement;
+source=source.parentElement;
+cs  =  source.children;
+//alert(cs.length);
+if  (cs[1].style.backgroundColor!=highlightcolor&&source.id!="nc"&&cs[1].style.backgroundColor!=clickcolor)
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor=highlightcolor;
+}
+}
+
+function  changeback(){
+if  (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="nc")
+return
+if  (event.toElement!=source&&cs[1].style.backgroundColor!=clickcolor)
+//source.style.backgroundColor=originalcolor
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor="";
+}
+}
+
+function  clickto(){
+source=event.srcElement;
+if  (source.tagName=="TR"||source.tagName=="TABLE")
+return;
+while(source.tagName!="TD")
+source=source.parentElement;
+source=source.parentElement;
+cs  =  source.children;
+//alert(cs.length);
+if  (cs[1].style.backgroundColor!=clickcolor&&source.id!="nc")
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor=clickcolor;
+}
+else
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor="";
+}
+}
+</script>
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="30" background="../../static/tab/images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="30"><img src="../../static/tab/images/tab_03.gif" width="12" height="30" /></td>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="5%"><div align="center"><img src="../../static/tab/images/tb.gif" width="16" height="16" /></div></td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[新闻中心]-[新闻列表]</td>
+              </tr>
+            </table></td>
+            <td width="54%">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="16"><img src="../../static/tab/images/tab_07.gif" width="16" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="8" background="../../static/tab/images/tab_12.gif">&nbsp;</td>
+        <td height="300" valign="top">
+
+
+
+
+<!--
+   【xinwen_fenlei】 0-id  1-caidan_mingcheng  2-caidan_lujing 3-caidan_jibie  4-caidan_suoshu  5-paixu_id
+   【xinwen】0-id  1-xinxi_lxid1  2-xinxi_lxid2  3-xinxi_biaoti  4-xinxi_riqi 5-xinxi_jianjie_yn 6-xinxi_jianjie
+    7-xinxi_tupian_yn   8-xinxi_tupian  9-xinxi_ding  10-xinxi_neirong  11-add_riqi  12-add_shijian
+ -->
+
+{#<table width="100%" border="0" cellspacing="1" cellpadding="5"  align="center" bgcolor="#F6F6F6">#}
+{#    <tr>#}
+{#        <td bgcolor="#E0F3FF"  width="20%">时间</td>#}
+{#        <td bgcolor="#E0F3FF"  width="30%">标题</td>#}
+{#        <td bgcolor="#E0F3FF"  width="15%">类型</td>#}
+{#        <td bgcolor="#E0F3FF"  width="10%">推荐</td>#}
+{#        <td bgcolor="#E0F3FF"  width="10%">缩略图</td>#}
+{#        <td bgcolor="#E0F3FF"  width="15%">操作</td>#}
+{#    </tr>#}
+{##}
+{#   {% for row in rows %}#}
+{#       <tr>#}
+{#            <td bgcolor="#FFFFFF">{{ row.11|date:"Y-n-d" }}</td>#}
+{#            <td bgcolor="#FFFFFF">{{ row.3 }}</td>#}
+{#            <td bgcolor="#FFFFFF">{{ row.1 }}</td>#}
+{#            <td bgcolor="#FFFFFF">{{ row.5 }}</td>#}
+{#            <td bgcolor="#FFFFFF">{{ row.7 }}</td>#}
+{#            <td bgcolor="#FFFFFF">#}
+{#                修改#}
+{#                删除#}
+{#            </td>#}
+{#       </tr>#}
+{#   {% endfor %}#}
+{#</table>#}
+
+
+
+{{ biaoge|safe }}
+
+
+        
+        
+        </td>
+        <td width="8" background="../../static/tab/images/tab_15.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="35" background="../../static/tab/images/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="35"><img src="../../static/tab/images/tab_18.gif" width="12" height="35" /></td>
+        <td align="center">
+            {{ caidan|safe }}
+        </td>
+        <td width="16"><img src="../../static/tab/images/tab_20.gif" width="16" height="35" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>

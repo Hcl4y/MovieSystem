@@ -1,0 +1,178 @@
+@charset "utf-8";
+
+/* 头部1 开始 */
+*{
+	margin:0;padding:0;
+	font-size: 13px;
+} 
+a{
+	text-decoration: none;
+	color:#333;
+}
+
+.tou1_bg{
+	background: #fafafa;border-bottom: 1px solid #DBDBDB; padding: 5px;
+	display: flex;
+	
+}
+.tou1_1200{
+	width: 1200px;
+	margin: auto;
+	display: flex;
+}
+.tou1_zuo{
+	flex-grow: 1;
+	display: flex;
+}
+.tou1_you{
+	display: flex; /* 解决客服中心 上下居中 */
+}
+.tou1_you span{
+	color:gray;
+}
+.tou1_you a{
+	text-decoration: none;
+}
+.red{
+	color: red;
+}
+.gray{
+	color: gray;
+}
+
+.menu{
+	display: inline-block;
+}
+.menu li {
+	position: relative;
+	list-style: none;
+	float: left;
+	display: block;
+	height: 22px;
+}
+.menu ul {
+	position: absolute;
+	top:22px;
+	left: -10px;
+	width: 80px;
+	opacity: 0;  /* opacity 属性设置元素的不透明级别 */
+	transition: opacity .25s ease .1s;
+	background: #fafafa;
+}
+.menu li:hover > ul {
+	opacity: 1;
+	
+}
+
+/* 头部2 开始 */
+.tou2{
+	display: flex;
+	padding:10px 0 10px 0;
+}
+.tou2_1200{
+	width: 1200px;
+	margin: auto;
+	display: flex;
+	padding: 0px 0 10px 0;
+}
+.tou2_zuo{
+	margin-right: 50px;
+}
+.tou2_zhong{
+ 	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+.tou2_zhong_shang{
+	height: 15px;
+}
+.tou2_zhong_zhong{
+	display: flex;
+	height: 40px;
+}
+.cx{
+	border: 3px solid red; width: 450px;
+}
+.cxbutton{
+	border: 3px solid red; padding: 7px;background: red; color: white;font-size: 16px;
+}
+.tou2_you{
+	display: flex;
+	padding: 3px 20px;
+	margin: auto;
+ 	background: #fafafa;
+	border: 1px solid #f2f2f2;
+	vertical-align: middle;	
+}
+.tou2_you_shang{
+	height: 15px;
+}
+.tou2_you_zhong{
+ 
+}
+.tou2_you_zhong_che  {
+ 	display: flex;
+}
+.che_wenzi{
+	height: 30px;
+	line-height: 30px;
+	margin-left: 10px;
+}
+
+.gouwucheshu{
+	position: relative;
+	width: 13px;
+	height: 13px;
+	background-color: red;
+	border-radius: 50%;
+	line-height: 13px;
+	text-align: center;
+	color: white;
+	font-size: 11px;
+	padding: 1px;
+
+}
+
+
+
+/* 头部3 开始 */
+.tou3{
+	display: flex;
+	border-bottom: 3px solid #292929;
+}
+.tou3_1200{
+	width: 1200px;
+	margin: auto;
+	display: flex;
+}
+.tou1_1{
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+	background: #232323;
+	color: white;
+	font-size: 15px;
+}
+.tou1_2{
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+	font-size: 15px;
+	background: #f2f2f2;
+	border-right: 1px solid white;
+}
+.tou1_2:hover{
+	background: red;
+	color: white;
+}
+.tou1_3{
+	flex-grow: 1;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.bg_checked01{
+	background-color:#EBEBEB;
+	}
+
+

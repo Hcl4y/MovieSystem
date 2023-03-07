@@ -1,0 +1,94 @@
+{% load static %}
+<html>
+<head>
+    <title>{{ myweb_key.1 }}</title>
+    <link rel="stylesheet" href="/static/css/top.css">
+    <link rel="stylesheet" href="/static/css/end.css">
+    <link rel="stylesheet" href="/static/css/huiyuan_mima.css">
+    <link rel="stylesheet" href="/static/css/huiyuan.css">
+    <link rel="stylesheet" href="/static/css/chanpin_fenlei.css">
+</head>
+<body>
+{% include "pc/toubu.html" %}
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <!--中间宽度1200 表格 开始-->
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <!--中间宽度1200 左侧200 开始-->
+
+                       <table width="100%" border="0" style="border: 1px dotted gainsboro;" >
+                            <tr>
+                                <td height="35" style="background:#333; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">新闻分类</td>
+                            </tr>
+                            <tr>
+                                <td  style="border-bottom:1px dotted #CCCCCC;padding:10px;"  align="center">
+                                    <a
+                                        {% if  leixing_id == 0  %}
+                                            class=" fenlei_zuo_xuanzhong "
+                                        {% else %}
+                                            class=" fenlei_zuo_xiangmu "
+                                        {% endif %}
+                                        href="/xinxi_list/0/0">
+                                        所有分类
+                                    </a>
+
+                                </td>
+                            </tr>
+
+                            {% for fenlei in fenleis_fenlei %}
+                            <tr>
+                                <td  style="border-bottom:1px dotted #CCCCCC;padding:10px;"  align="center">
+                                     <a href="/xinxi_list/0/{{ fenlei.0 }}"
+                                        {% if  fenlei.0 == leixing_id  %}
+                                            class="fenlei_zuo_xiangmu fenlei_zuo_xuanzhong"
+                                        {% else %}
+                                            class="fenlei_zuo_xiangmu"
+                                        {% endif %}
+                                        >{{ fenlei.1 }}
+                                    </a>
+                                </td>
+                            </tr>
+                           {% endfor %}
+                        </table>
+
+
+                        <!--中间宽度1200 左侧200 结束-->
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+                        <!--中间宽度1200 右侧 开始-->
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    信息列表
+                                    {% if chaxun %}
+                                        <font color="red">(查询：{{ chaxun }})</font>
+                                    {% else %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+                                    {{ biaoge|safe }}
+                                    {{ caidan|safe }}
+                                </td>
+                            </tr>
+                        </table>
+                        <!--中间宽度1200 右侧 结束-->
+                    </td>
+                </tr>
+            </table>
+            <!--中间宽度1200 表格 结尾-->
+        </td>
+    </tr>
+</table>
+
+{% include "pc/weibu.html" %}
+
+</body>
+</html>

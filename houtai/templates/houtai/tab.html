@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.STYLE1 {font-size: 12px}
+.STYLE3 {font-size: 12px; font-weight: bold; }
+.STYLE4 {
+	color: #03515d;
+	font-size: 12px;
+}
+-->
+</style>
+
+<script>
+var  highlightcolor='#c1ebff';
+//此处clickcolor只能用win系统颜色代码才能成功,如果用#xxxxxx的代码就不行,还没搞清楚为什么:(
+var  clickcolor='#51b2f6';
+function  changeto(){
+source=event.srcElement;
+if  (source.tagName=="TR"||source.tagName=="TABLE")
+return;
+while(source.tagName!="TD")
+source=source.parentElement;
+source=source.parentElement;
+cs  =  source.children;
+//alert(cs.length);
+if  (cs[1].style.backgroundColor!=highlightcolor&&source.id!="nc"&&cs[1].style.backgroundColor!=clickcolor)
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor=highlightcolor;
+}
+}
+
+function  changeback(){
+if  (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="nc")
+return
+if  (event.toElement!=source&&cs[1].style.backgroundColor!=clickcolor)
+//source.style.backgroundColor=originalcolor
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor="";
+}
+}
+
+function  clickto(){
+source=event.srcElement;
+if  (source.tagName=="TR"||source.tagName=="TABLE")
+return;
+while(source.tagName!="TD")
+source=source.parentElement;
+source=source.parentElement;
+cs  =  source.children;
+//alert(cs.length);
+if  (cs[1].style.backgroundColor!=clickcolor&&source.id!="nc")
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor=clickcolor;
+}
+else
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor="";
+}
+}
+</script>
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="30" background="../../static/tab/images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="30"><img src="../../static/tab/images/tab_03.gif" width="12" height="30" /></td>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="5%"><div align="center"><img src="../../static/tab/images/tb.gif" width="16" height="16" /></div></td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[后台管理系统]-[后台首页]</td>
+              </tr>
+            </table></td>
+            <td width="54%">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="16"><img src="../../static/tab/images/tab_07.gif" width="16" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="8" background="../../static/tab/images/tab_12.gif">&nbsp;</td>
+        <td height="300" valign="top">
+
+            {{ cuowu|safe }}
+
+系统功能（黄菊华老师QQ/微信同号 45157718）：<br>
+<pre>
+主要模块包括以下几点：
+
+(1)登录功能：注册普通账号登录；登录后可以修改用户的基本信息，也可以退出。
+
+(2)资讯管理：后台录入资讯，在网站前端，用户可以任意浏览资讯列表和详细信息
+
+(3)资讯查询：支持查询整个新闻系统的内容，输入关键字点击搜索即可。
+
+(4)资讯阅读：游客和用户都可以进行资讯的阅读。
+
+(5)资讯收藏：阅读到有兴趣的资讯，注册登录的用户可以进行收藏操作。
+
+(6)资讯评论：阅读资讯的时候，登录的用户，可以发表评论；后台审核后显示。
+
+(7)资讯审核：后台管理员，对用户发表的评论，审核后，前台其他用户可见。
+
+(8)浏览记录：记录用户所有浏览过的资讯信息
+
+(9)我的收藏：收藏的感兴趣的资讯文章，可以直接点击去阅读，支持删除。
+
+(10)我参与评论的文章：列出参与评论的文章、评论内容、审核状态。
+
+(11)用户信息：姓名、联系方式、邮箱、头像、简介、介绍等，支持随时修改；用户注册的信息后台管理员可见；后台管理员可以删除。
+
+(12)密码修改：修改注册的密码。
+
+(13)退出登录：清除登录的cookie，返回到首页。
+
+(14)留言反馈：用户填写李哭咽的主题、联系人、电话、邮箱、留言内容；后台管理可以查看留言列表，可以删除留言。
+
+(15)轮播广告：后台设置首页轮播广告图，可以连接到广告页面。
+</pre>
+
+        
+        
+        </td>
+        <td width="8" background="../../static/tab/images/tab_15.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="35" background="../../static/tab/images/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="35"><img src="../../static/tab/images/tab_18.gif" width="12" height="35" /></td>
+        <td></td>
+        <td width="16"><img src="../../static/tab/images/tab_20.gif" width="16" height="35" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>

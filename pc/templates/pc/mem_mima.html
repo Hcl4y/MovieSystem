@@ -1,0 +1,90 @@
+{% load static %}
+<html>
+<head>
+    <title>{{ myweb_key.1 }}</title>
+    <link rel="stylesheet" href="/static/css/top.css">
+    <link rel="stylesheet" href="/static/css/end.css">
+    <link rel="stylesheet" href="/static/css/huiyuan_mima.css">
+    <link rel="stylesheet" href="/static/css/huiyuan.css">
+    <style>
+        .rongqi{ width:980px;display:flex;flex-wrap:wrap;align-content:flex-start;}
+        .xm{  height:120px; background-color:#FFF;padding:10px; box-sizing:border-box; margin:10px 20px 10px 0px; background:#F3F3F3; border-radius:5px;}
+        .xm:active {
+        }
+        .xm:hover {
+            box-shadow: 5px 5px 10px  #CCCCCC;
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcb48', endColorstr='#ff9c23',GradientType=0 );
+        }
+    </style>
+</head>
+<body>
+{% include "pc/toubu.html" %}
+
+
+<table width="100%" border="0">
+    <tr>
+        <td align="center">
+            <!--中间宽度1200 表格 开始-->
+            <table width="1200" border="0" align="center">
+                <tr>
+                    <td width="200" valign="top">
+                        <!--中间宽度1200 左侧200 开始-->
+                       {% include "pc/mem_left.html" %}
+                        <!--中间宽度1200 左侧200 结束-->
+                    </td>
+                    <td width="5"></td>
+                    <td valign="top" >
+                        <!--中间宽度1200 右侧 开始-->
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                            <tr>
+                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                    密码修改
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+
+                                    <form method="post" name="form1" action="">
+                                    <table width="99%" border="0" cellspacing="1" cellpadding="5"  bgcolor="#F0F0F0" align="center"  style="padding:5px">
+                                        <tr>
+                                            <td bgcolor="#FFFFFF"  width="15%" align="center"  class="p10">原始密码</td>
+                                            <td colspan="2" bgcolor="#FFFFFF" class="p10">
+                                                <input type="text" placeholder="请输入原始密码" name="mm1" required  />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" align="center" class="p10">确认密码</td>
+                                            <td colspan="2" bgcolor="#FFFFFF" class="p10">
+                                                <input type="text" placeholder="请输入新的密码" name="mm2" required/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td height="56" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+                                            <td colspan="2" bgcolor="#FFFFFF">
+                                                <input type="submit" value=" 修改信息 " style="background-color:#F60; color:#FFF; border-radius:5px; padding:10px; border:0; cursor:pointer;">
+                                            </td>
+                                        </tr>
+
+                                        {{ cuowu|safe }}
+
+                                    </table>
+                                    </form>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <!--中间宽度1200 右侧 结束-->
+                    </td>
+                </tr>
+            </table>
+            <!--中间宽度1200 表格 结尾-->
+        </td>
+    </tr>
+</table>
+
+{% include "pc/weibu.html" %}
+
+</body>
+</html>

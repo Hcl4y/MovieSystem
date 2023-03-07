@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.STYLE1 {font-size: 12px}
+.STYLE3 {font-size: 12px; font-weight: bold; }
+.STYLE4 {
+	color: #03515d;
+	font-size: 12px;
+}
+-->
+</style>
+
+<script>
+var  highlightcolor='#c1ebff';
+//此处clickcolor只能用win系统颜色代码才能成功,如果用#xxxxxx的代码就不行,还没搞清楚为什么:(
+var  clickcolor='#51b2f6';
+function  changeto(){
+source=event.srcElement;
+if  (source.tagName=="TR"||source.tagName=="TABLE")
+return;
+while(source.tagName!="TD")
+source=source.parentElement;
+source=source.parentElement;
+cs  =  source.children;
+//alert(cs.length);
+if  (cs[1].style.backgroundColor!=highlightcolor&&source.id!="nc"&&cs[1].style.backgroundColor!=clickcolor)
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor=highlightcolor;
+}
+}
+
+function  changeback(){
+if  (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="nc")
+return
+if  (event.toElement!=source&&cs[1].style.backgroundColor!=clickcolor)
+//source.style.backgroundColor=originalcolor
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor="";
+}
+}
+
+function  clickto(){
+source=event.srcElement;
+if  (source.tagName=="TR"||source.tagName=="TABLE")
+return;
+while(source.tagName!="TD")
+source=source.parentElement;
+source=source.parentElement;
+cs  =  source.children;
+//alert(cs.length);
+if  (cs[1].style.backgroundColor!=clickcolor&&source.id!="nc")
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor=clickcolor;
+}
+else
+for(i=0;i<cs.length;i++){
+	cs[i].style.backgroundColor="";
+}
+}
+</script>
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="30" background="../../static/tab/images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="30"><img src="../../static/tab/images/tab_03.gif" width="12" height="30" /></td>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="5%"><div align="center"><img src="../../static/tab/images/tb.gif" width="16" height="16" /></div></td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[广告中心]-[广告设置]</td>
+              </tr>
+            </table></td>
+            <td width="54%">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="16"><img src="../../static/tab/images/tab_07.gif" width="16" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="8" background="../../static/tab/images/tab_12.gif">&nbsp;</td>
+        <td height="300" valign="top">
+
+
+
+<form method="post" name="form1">
+
+<table width="99%" border="0" cellspacing="1" cellpadding="0" bgcolor="#F2F2F2">
+  <tr>
+    <td bgcolor="#F7F7F7"  height="35">&nbsp;</td>
+    <td colspan="2" bgcolor="#F7F7F7"><strong>首页广告图设置</strong></td>
+  </tr>
+
+{## 【guanggao】0-id  1-wz1  2-tpdz1  3-ljdz1  4-wz2 5-tpdz2 6-ljdz2#}
+{## 7-wz3   8-tpdz3  9-ljdz3  10-wz4  11-tpdz4  12-ljdz4#}
+  <tr>
+    <td width="10%" rowspan="2" align="center" bgcolor="#FFFFFF">广告图（1）</td>
+    <td width="50%" bgcolor="#FFFFFF">
+    	图片地址：<input type="text" name="tpdz1" value="{{ info.2 }}" size="40">
+	</td>
+    <td width="40%" rowspan="2" bgcolor="#FFFFFF">
+    	<iframe frameborder="0" src="/upload01?domid=tpdz1" width="100%" height="25"></iframe>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">
+      广告链接：<input type="text" name="ljdz1" value="{{ info.3 }}" size="40">
+      <br>广告说明：<input type="text" name="wz1" value="{{ info.1 }}" size="40">
+    </td>
+  </tr>
+  <tr><td colspan="3" bgcolor="#F9F9F9">&nbsp;</td></tr>
+
+  <tr>
+    <td width="10%" rowspan="2" align="center" bgcolor="#FFFFFF">广告图（2）</td>
+    <td width="50%" bgcolor="#FFFFFF">
+    	图片地址：<input type="text" name="tpdz2" value="{{ info.5 }}" size="40">
+	</td>
+    <td width="40%" rowspan="2" bgcolor="#FFFFFF">
+    	<iframe frameborder="0" src="/upload01?domid=tpdz2" width="100%" height="25"></iframe>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">
+      广告链接：<input type="text" name="ljdz2" value="{{ info.6 }}" size="40">
+      <br>广告说明：<input type="text" name="wz2" value="{{ info.4 }}" size="40">
+    </td>
+  </tr>
+  <tr><td colspan="3" bgcolor="#F9F9F9">&nbsp;</td></tr>
+
+
+  <tr>
+    <td width="10%" rowspan="2" align="center" bgcolor="#FFFFFF">广告图（3）</td>
+    <td width="50%" bgcolor="#FFFFFF">
+    	图片地址：<input type="text" name="tpdz3" value="{{ info.8 }}" size="40">
+	</td>
+    <td width="40%" rowspan="2" bgcolor="#FFFFFF">
+    	<iframe frameborder="0" src="/upload01?domid=tpdz3" width="100%" height="25"></iframe>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">
+      广告链接：<input type="text" name="ljdz3" value="{{ info.9 }}" size="40">
+      <br>广告说明：<input type="text" name="wz3" value="{{ info.7 }}" size="40">
+    </td>
+  </tr>
+  <tr><td colspan="3" bgcolor="#F9F9F9">&nbsp;</td></tr>
+
+
+  <tr>
+    <td width="10%" rowspan="2" align="center" bgcolor="#FFFFFF">广告图（4）</td>
+    <td width="50%" bgcolor="#FFFFFF">
+    	图片地址：<input type="text" name="tpdz4" value="{{ info.11 }}" size="40">
+	</td>
+    <td width="40%" rowspan="2" bgcolor="#FFFFFF">
+    	<iframe frameborder="0" src="/upload01?domid=tpdz4" width="100%" height="25"></iframe>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">
+      广告链接：<input type="text" name="ljdz4" value="{{ info.12 }}" size="40">
+      <br>广告说明：<input type="text" name="wz4" value="{{ info.10 }}" size="40">
+    </td>
+  </tr>
+  <tr><td colspan="3" bgcolor="#F9F9F9">&nbsp;</td></tr>
+
+
+  <tr><td colspan="3" bgcolor="#FFFFFF">&nbsp;</td></tr>
+
+
+
+  <tr>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td colspan="2" bgcolor="#FFFFFF"  height="30">
+        <input type="hidden" name="id" value="{{ id }}"/>
+    	<input type="submit" value=" 更新首页广告图设置 ">
+    </td>
+    </tr>
+</table>
+</form>
+
+
+
+
+
+
+        
+        </td>
+        <td width="8" background="../../static/tab/images/tab_15.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="35" background="../../static/tab/images/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="35"><img src="../../static/tab/images/tab_18.gif" width="12" height="35" /></td>
+        <td> </td>
+        <td width="16"><img src="../../static/tab/images/tab_20.gif" width="16" height="35" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>

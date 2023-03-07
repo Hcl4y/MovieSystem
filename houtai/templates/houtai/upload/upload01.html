@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="margin:0; padding:0;">
+
+<form action="" method="post" enctype="multipart/form-data">
+    <input type="file" name="myfile" />
+    <input type="submit" value="提交" />
+    <input type="hidden" name="domid" value="{{ domid }}" />
+</form>
+
+{{ imgs }}
+{% if imgs %}
+     <img src="{{ imgs }}">
+{% else %}
+<h1>您没有上传任何图片</h1>
+{% endif %}
+
+</body>
+</html>
