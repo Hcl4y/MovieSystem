@@ -128,7 +128,7 @@ def mem_login(request):
                 return response
             return redirect("/mem_main")
         else:
-            cuowu = "<script>alert('账号错误')</script>"
+            cuowu = "<script>alert('用户名或密码错误！')</script>"
             neirong = {
                 "cuowu": cuowu
             }
