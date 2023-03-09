@@ -1,20 +1,19 @@
-
 <!--头部文件 欢迎注册 开始-->
 <div class="tou1_bg">
-	<div class="tou1_1200">
-		<div class="tou1_zuo">
-			<img src="/static/img/xing.png" width="16px" height="16px;">
-			    你好，欢迎使用 {{ myweb_key.1 }}
-			&nbsp;&nbsp;
-			<ul class="menu">
-				<li>
-				</li>
-			</ul>
-		</div>
-		<div class="tou1_you">
+    <div class="tou1_1200">
+        <div class="tou1_zuo">
+            <img src="/static/img/xing.png" width="16px" height="16px;">
+            你好，欢迎使用 {{ myweb_key.1 }}
+            &nbsp;&nbsp;
+            <ul class="menu">
+                <li>
+                </li>
+            </ul>
+        </div>
+        <div class="tou1_you">
             {% if h_id %}   <!--登录状态-->
                 欢迎 {{ h_name }}&nbsp;登录 【<a href="/mem_main">进入用户中心</a>】 &nbsp
-            {% else %}<!--没有登录状态-->
+                {% else %}<!--没有登录状态-->
                 <span>注册用户</span>
                 <a href="/mem_login" class="red">[请登录]</a>
                 &nbsp;&nbsp;<img src="/static/img/l.png">&nbsp;&nbsp;
@@ -22,123 +21,124 @@
                 <a href="/mem_reg" class="red">[免费注册]</a>
             {% endif %}
 
-{#			<img src="/static/img/l.png">&nbsp;&nbsp;#}
-{#			<a href="/guanyu_women?id=1">关于我们</a>&nbsp#}
-{#			<img src="/static/img/l.png">&nbsp;&nbsp;#}
-		</div>
-	</div>
+            {#			<img src="/static/img/l.png">&nbsp;&nbsp;#}
+            {#			<a href="/guanyu_women?id=1">关于我们</a>&nbsp#}
+            {#			<img src="/static/img/l.png">&nbsp;&nbsp;#}
+        </div>
+    </div>
 </div>
 <!--头部文件 欢迎注册 结束-->
 
 <!--头部文件 log和查询 开始-->
 <form name="form_chaxun" method="post" action="/chaxun">
-<div class="tou2">
-	<div class="tou2_1200">
- 		<div class="tou2_zuo">
-			<a href="/"><img src="/static/img/logo.jpg"></a>
-		</div>
- 		<div class="tou2_zhong">
-			<div class="tou2_zhong_shang">
-			</div>
-			<div class="tou2_zhong_zhong">
-				<input type="text" name="chaxun_neirong"  class="cx">
-				<input type="submit" value=" 搜索 " class="cxbutton">
-			</div>
-			<div class="tou2_zhong_xia">
-             {% for mykey in remen_key %}
-                 <a href="/pc_xiangmu_list/0/0?remen={{ mykey }}" class=‘gray’> {{ mykey }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
-             {% endfor %}
+    <div class="tou2">
+        <div class="tou2_1200">
+            <div class="tou2_zuo">
+                <a href="/"><img src="/static/img/logo.jpg"></a>
+            </div>
+            <div class="tou2_zhong">
+                <div class="tou2_zhong_shang">
+                </div>
+                <div class="tou2_zhong_zhong">
+                    <input type="text" name="chaxun_neirong" class="cx">
+                    <input type="submit" value=" 搜索 " class="cxbutton">
+                </div>
+                <div class="tou2_zhong_xia">
+                    {% for mykey in remen_key %}
+                        <a href="/pc_xiangmu_list/0/0?remen={{ mykey }}" class=‘gray’> {{ mykey }}</a>&nbsp;&nbsp;&nbsp;
+                        &nbsp;
+                    {% endfor %}
 
-			</div>
-		</div>
+                </div>
+            </div>
 
- 		<div class="tou2_you">
-			<div class="tou2_you_shang">
-			</div>
-			<div class="tou2_you_zhong">
-				<a class="tou2_you_zhong_che" href="/guanyu_liuyan">
-					<div><img src="/static/img/icon-kefu.png" width="30" height="30"></div>
-					<div class="che_wenzi">留言反馈</div>
-					<!--p class="gouwucheshu">5</p-->
-				</a>
-			</div>
-			<div class="tou2_you_xia">
+            <div class="tou2_you">
+                <div class="tou2_you_shang">
+                </div>
+                <div class="tou2_you_zhong">
+                    <a class="tou2_you_zhong_che" href="/guanyu_liuyan">
+                        <div><img src="/static/img/icon-kefu.png" width="30" height="30"></div>
+                        <div class="che_wenzi">留言反馈</div>
+                        <!--p class="gouwucheshu">5</p-->
+                    </a>
+                </div>
+                <div class="tou2_you_xia">
 
-			</div>
-		</div>
-	</div>
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 <!--头部文件 log和查询 结束-->
 
 <!--头部文件 网站菜单 开始-->
 <div class="tou3">
-	<div class="tou3_1200">
-		<a  href="/"
-            {% if request.get_full_path == "/" %}
-                class='tou1_1'
-            {% else %}
-                class='tou1_2'
-            {% endif %}
+    <div class="tou3_1200">
+        <a href="/"
+                {% if request.get_full_path == "/" %}
+           class='tou1_1'
+                {% else %}
+           class='tou1_2'
+                {% endif %}
         >
-			网站首页
-		</a>
+            网站首页
+        </a>
 
-{#    {{ request.path }}#}
-{#    {{ request.get_full_path }}#}
-		<a  href="/guanyu_women?id=5"
-            {% if request.get_full_path == "/guanyu_women?id=5" %}
-                class='tou1_1'
-            {% else %}
-                class='tou1_2'
-            {% endif %}
+        {#    {{ request.path }}#}
+        {#    {{ request.get_full_path }}#}
+        <a href="/guanyu_women?id=5"
+                {% if request.get_full_path == "/guanyu_women?id=5" %}
+           class='tou1_1'
+                {% else %}
+           class='tou1_2'
+                {% endif %}
         >
-			关于我们
-		</a>
+            关于我们
+        </a>
 
-		<a  href="/pc_chanpin_list/0/0"
-            {% if "/pc_chanpin_list/" in request.path or "/pc_chanpin_xiangqing" in request.path  %}
-                class='tou1_1'
-            {% else %}
-                class='tou1_2'
-            {% endif %}
+        <a href="/pc_chanpin_list/0/0"
+                {% if "/pc_chanpin_list/" in request.path or "/pc_chanpin_xiangqing" in request.path %}
+           class='tou1_1'
+                {% else %}
+           class='tou1_2'
+                {% endif %}
         >
-			电影院环境
-		</a>
+            电影院环境
+        </a>
 
-		<a  href="/pc_xiangmu_list/0/0"
-            {% if "/pc_xiangmu_list/" in request.path or "/pc_xiangmu_xiangqing" in request.path  %}
-                class='tou1_1'
-            {% else %}
-                class='tou1_2'
-            {% endif %}
+        <a href="/pc_xiangmu_list/0/0"
+                {% if "/pc_xiangmu_list/" in request.path or "/pc_xiangmu_xiangqing" in request.path %}
+           class='tou1_1'
+                {% else %}
+           class='tou1_2'
+                {% endif %}
         >
-			电影中心
-		</a>
+            电影中心
+        </a>
 
-		<a  href="/xinxi_list/0/0"
-            {% if "/xinxi_list/" in request.path or "/xinxi_xiangqing" in request.path %}
-                class='tou1_1'
-            {% else %}
-                class='tou1_2'
-            {% endif %}
+        <a href="/xinxi_list/0/0"
+                {% if "/xinxi_list/" in request.path or "/xinxi_xiangqing" in request.path %}
+           class='tou1_1'
+                {% else %}
+           class='tou1_2'
+                {% endif %}
         >
-			资讯中心
-		</a>
+            资讯中心
+        </a>
 
-		<a  href="/guanyu_women?id=2"
-            {% if request.get_full_path == "/guanyu_women?id=2" %}
-                class='tou1_1'
-            {% else %}
-                class='tou1_2'
-            {% endif %}
+        <a href="/guanyu_women?id=2"
+                {% if request.get_full_path == "/guanyu_women?id=2" %}
+           class='tou1_1'
+                {% else %}
+           class='tou1_2'
+                {% endif %}
         >
-			联系我们
-		</a>
+            联系我们
+        </a>
 
-		<a class="tou1_3" href="/xinxi_list/0/0">
-			<img src="/static/img/li.png">
-		</a>
-	</div>
+        <a class="tou1_3" href="/xinxi_list/0/0">
+            <img src="/static/img/li.png">
+        </a>
+    </div>
 </div>
 <!--头部文件 网站菜单 结束-->

@@ -77,7 +77,7 @@ def api_zixun_shoucang(request):
         add_shijian = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         curson_insert = connection.cursor()
         sql_insert = "insert into xinwen_shoucang(zixun_id,u_id,riqi,shijian) values ('%s','%s','%s','%s')" % (
-        zixun_id, u_id, add_riqi, add_shijian)
+            zixun_id, u_id, add_riqi, add_shijian)
         curson_insert.execute(sql_insert)
         cuowu = "<script>alert('收藏成功')</script>"
     return HttpResponse(cuowu)
@@ -102,7 +102,7 @@ def api_zixun_pinglun_add(request):
         add_shijian = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         curson_insert = connection.cursor()
         sql_insert = "insert into xinwen_pinglun(neirong,u_id,zixun_id,riqi,shijian) values ('%s',%s,%s,'%s','%s')" % (
-        neirong, h_id, zixun_id, add_riqi, add_shijian)
+            neirong, h_id, zixun_id, add_riqi, add_shijian)
         curson_insert.execute(sql_insert)
         cuowu = "<script>alert('您的评论已经提交，审核后显示！')</script>"
     return HttpResponse(cuowu)
@@ -139,7 +139,7 @@ def mem_zixun_shoucang_list(request, dijiye):
     cursor = connection.cursor()
     sql = "select  sc.id as scid,sc.riqi,xw.id as xwid,xw.xinxi_biaoti from xinwen_shoucang as sc,xinwen as xw " \
           "where sc.zixun_id=xw.id and sc.u_id=%s  order by sc.id desc limit %s,%s" % (
-          h_id, int(meiye) * int(dijiye), meiye)
+              h_id, int(meiye) * int(dijiye), meiye)
     # print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
@@ -156,7 +156,7 @@ def mem_zixun_shoucang_list(request, dijiye):
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF" height="27">%s</td>' % row[1]  # 评论时间
         biaoge = biaoge + '<td bgcolor="#FFFFFF"><a href="/xinxi_xiangqing?zxid=%s" target="_blank">%s</a></td>' % (
-        row[2], row[3])  # 会员信息
+            row[2], row[3])  # 会员信息
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'  # 订单状态 + 处理
         biaoge = biaoge + '<a href="/mem_zixun_shoucang_del?id=%s&dijiye=%s">删除</a>' % (row[0], dijiye)
         biaoge = biaoge + '</td>'
@@ -223,7 +223,7 @@ def mem_zixun_pinglun_list(request, dijiye):
     cursor = connection.cursor()
     sql = "select  pinglun.id as plid,pinglun.riqi,pinglun.neirong,pinglun.yn_shenhe,xw.id as xwid,xw.xinxi_biaoti from xinwen_pinglun as pinglun,xinwen as xw " \
           "where pinglun.zixun_id=xw.id and pinglun.u_id=%s  order by pinglun.id desc limit %s,%s" % (
-          h_id, int(meiye) * int(dijiye), meiye)
+              h_id, int(meiye) * int(dijiye), meiye)
     # print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
@@ -242,7 +242,7 @@ def mem_zixun_pinglun_list(request, dijiye):
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF" height="27">%s</td>' % row[1]  # 评论时间
         biaoge = biaoge + '<td bgcolor="#FFFFFF"><a href="/xinxi_xiangqing?zxid=%s" target="_blank">%s</a></td>' % (
-        row[4], row[5])  # 会员信息
+            row[4], row[5])  # 会员信息
         biaoge = biaoge + '<td bgcolor="#FFFFFF" height="27">%s</td>' % row[2]  # 评论时间
 
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'  # 订单状态 + 处理
@@ -323,7 +323,7 @@ def mem_zixun_liulan_list(request, dijiye):
     cursor = connection.cursor()
     sql = "select  liulan.id as llid,liulan.riqi,xw.id as xwid,xw.xinxi_biaoti from xinwen_liulan as liulan,xinwen as xw " \
           "where liulan.zixun_id=xw.id and liulan.u_id=%s  order by liulan.id desc limit %s,%s" % (
-          h_id, int(meiye) * int(dijiye), meiye)
+              h_id, int(meiye) * int(dijiye), meiye)
     # print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
@@ -340,7 +340,7 @@ def mem_zixun_liulan_list(request, dijiye):
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF" height="27">%s</td>' % row[1]  # 评论时间
         biaoge = biaoge + '<td bgcolor="#FFFFFF"><a href="/xinxi_xiangqing?zxid=%s" target="_blank">%s</a></td>' % (
-        row[2], row[3])  # 会员信息
+            row[2], row[3])  # 会员信息
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'  # 订单状态 + 处理
         biaoge = biaoge + '<a href="/mem_zixun_liulan_del?id=%s&dijiye=%s">删除</a>' % (row[0], dijiye)
         biaoge = biaoge + '</td>'
@@ -413,12 +413,12 @@ def xinxi_xiangqing(request):
         if h_id is None:
             curson_insert = connection.cursor()
             sql_insert = "insert into xinwen_liulan(zixun_id,riqi,shijian) values ('%s','%s','%s')" % (
-            zxid, add_riqi, add_shijian)
+                zxid, add_riqi, add_shijian)
             curson_insert.execute(sql_insert)
         else:
             curson_insert = connection.cursor()
             sql_insert = "insert into xinwen_liulan(zixun_id,u_id,riqi,shijian) values ('%s','%s','%s','%s')" % (
-            zxid, h_id, add_riqi, add_shijian)
+                zxid, h_id, add_riqi, add_shijian)
             curson_insert.execute(sql_insert)
 
         # 读取 浏览阅读数
@@ -506,10 +506,10 @@ def xinxi_list(request, dijiye, leixing_id):
             sql = "select * from xinwen order by id desc limit %s,%s" % (int(meiye) * int(dijiye), meiye)
         else:
             sql = "select * from xinwen where xinxi_biaoti like '%%%s%%'  order by id desc limit %s,%s" % (
-            chaxun, (int(meiye) * int(dijiye)), meiye)
+                chaxun, (int(meiye) * int(dijiye)), meiye)
     else:
         sql = "select * from xinwen where xinxi_lxid1=%s order by id desc limit %s,%s" % (
-        leixing_id, int(meiye) * int(dijiye), meiye)
+            leixing_id, int(meiye) * int(dijiye), meiye)
 
     # print(sql)
     cursor.execute(sql)
@@ -544,7 +544,7 @@ def xinxi_list(request, dijiye, leixing_id):
     caidan = caidan + '<br><a href="/xinxi_list/0/%s?remen=%s">首页</a>&nbsp;&nbsp;' % (leixing_id, chaxun)
     if int(dijiye) >= 1:
         caidan = caidan + '<a href="/xinxi_list/%s/%s?remen=%s">上一页</a>&nbsp;&nbsp;' % (
-        (int(dijiye) - 1), leixing_id, chaxun)
+            (int(dijiye) - 1), leixing_id, chaxun)
     else:
         caidan = caidan + '上一页&nbsp;&nbsp;'
 
@@ -552,7 +552,7 @@ def xinxi_list(request, dijiye, leixing_id):
         caidan = caidan + '下一页&nbsp;&nbsp;'
     else:
         caidan = caidan + '<a href="/xinxi_list/%s/%s?remen=%s">下一页</a>&nbsp;&nbsp;' % (
-        (int(dijiye) + 1), leixing_id, chaxun)
+            (int(dijiye) + 1), leixing_id, chaxun)
 
     caidan = caidan + '<a href="/xinxi_list/%s/%s?remen=%s">尾页</a>&nbsp;&nbsp;' % ((int(yeshu) - 1), leixing_id, chaxun)
 

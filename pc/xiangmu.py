@@ -66,10 +66,10 @@ def pc_xiangmu_list(request, dijiye, leixing_id):
             sql = "select * from xiangmu order by id desc limit %s,%s" % (int(meiye) * int(dijiye), meiye)
         else:
             sql = "select * from xiangmu where xinxi_biaoti like '%%%s%%'  order by id desc limit %s,%s" % (
-            chaxun, (int(meiye) * int(dijiye)), meiye)
+                chaxun, (int(meiye) * int(dijiye)), meiye)
     else:
         sql = "select * from xiangmu where xinxi_lxid=%s order by id desc limit %s,%s" % (
-        leixing_id, int(meiye) * int(dijiye), meiye)
+            leixing_id, int(meiye) * int(dijiye), meiye)
 
     print(sql)
     cursor.execute(sql)
@@ -97,7 +97,7 @@ def pc_xiangmu_list(request, dijiye, leixing_id):
         biaoge = biaoge + '<table width="100%" border="0" cellspacing="0" cellpadding="0">'
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '    <td rowspan="3" width="150px" align="center"><img src="http://%s/%s" height="88px"></td>' % (
-        request.get_host(), row[8])
+            request.get_host(), row[8])
         biaoge = biaoge + '    <td>电影标题：%s（价格：%s 元）</td>' % (row[2], row[3])
         biaoge = biaoge + '  </tr>'
         biaoge = biaoge + '  <tr>'
@@ -116,7 +116,7 @@ def pc_xiangmu_list(request, dijiye, leixing_id):
     caidan = caidan + '<br><a href="/pc_xiangmu_list/0/%s?remen=%s">首页</a>&nbsp;&nbsp;' % (leixing_id, chaxun)
     if int(dijiye) >= 1:
         caidan = caidan + '<a href="/pc_xiangmu_list/%s/%s?remen=%s">上一页</a>&nbsp;&nbsp;' % (
-        (int(dijiye) - 1), leixing_id, chaxun)
+            (int(dijiye) - 1), leixing_id, chaxun)
     else:
         caidan = caidan + '上一页&nbsp;&nbsp;'
 
@@ -124,10 +124,10 @@ def pc_xiangmu_list(request, dijiye, leixing_id):
         caidan = caidan + '下一页&nbsp;&nbsp;'
     else:
         caidan = caidan + '<a href="/pc_xiangmu_list/%s/%s?remen=%s">下一页</a>&nbsp;&nbsp;' % (
-        (int(dijiye) + 1), leixing_id, chaxun)
+            (int(dijiye) + 1), leixing_id, chaxun)
 
     caidan = caidan + '<a href="/pc_xiangmu_list/%s/%s?remen=%s">尾页</a>&nbsp;&nbsp;' % (
-    (int(yeshu) - 1), leixing_id, chaxun)
+        (int(yeshu) - 1), leixing_id, chaxun)
 
     caidan = caidan + "总数据：%s | " % zongshuju
     caidan = caidan + "每页：%s | " % meiye
@@ -198,12 +198,12 @@ def pc_xiangmu_xiangqing(request):
         if h_id is None:
             curson_insert = connection.cursor()
             sql_insert = "insert into xiangmu_liulan(xiangmu_id,riqi,shijian) values ('%s','%s','%s')" % (
-            cpid, add_riqi, add_shijian)
+                cpid, add_riqi, add_shijian)
             curson_insert.execute(sql_insert)
         else:
             curson_insert = connection.cursor()
             sql_insert = "insert into xiangmu_liulan(xiangmu_id,u_id,riqi,shijian) values ('%s','%s','%s','%s')" % (
-            cpid, h_id, add_riqi, add_shijian)
+                cpid, h_id, add_riqi, add_shijian)
             curson_insert.execute(sql_insert)
 
         # 读取 浏览阅读数
@@ -334,8 +334,9 @@ def api_xiangmu_ding_add(request):
     sql_insert = "insert into xiangmu_dingdan(u_id,xiangmu_id,xiangmu_mc,yuyue_riqi,yuyue_riqiid,yuyue_changci,yuyue_changciid,yuyue_zuoweis,yuyue_piaoshu,yuyue_feiyong,riqi,shijian,zt)" \
                  "  values (%s,%s,'%s','%s',%s,'%s',%s,'%s',%s,%s,'%s','%s',1)" \
                  % (
-                 u_id, xiangmu_id, xiangmu_mc, yuyue_riqi, yuyue_riqiid, yuyue_changci, yuyue_changciid, yuyue_zuoweis,
-                 yuyue_piaoshu, yuyue_feiyong, riqi, shijian)
+                     u_id, xiangmu_id, xiangmu_mc, yuyue_riqi, yuyue_riqiid, yuyue_changci, yuyue_changciid,
+                     yuyue_zuoweis,
+                     yuyue_piaoshu, yuyue_feiyong, riqi, shijian)
     curson_insert.execute(sql_insert)
     cuowu = "<script>alert('电影票订单提交成功！');window.parent.location='/pc_xiangmu_xiangqing?id=" + xiangmu_id + "';</script>"
 
@@ -362,7 +363,7 @@ def api_xiangmu_shoucang(request):
         add_shijian = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         curson_insert = connection.cursor()
         sql_insert = "insert into xiangmu_shoucang(u_id,xiangmu_id,xiangmu_mc,riqi,shijian) values (%s,%s,'%s','%s','%s')" % (
-        u_id, xiangmu_id, mc, add_riqi, add_shijian)
+            u_id, xiangmu_id, mc, add_riqi, add_shijian)
         curson_insert.execute(sql_insert)
         cuowu = "<script>alert('收藏成功');</script>"
     return HttpResponse(cuowu)
@@ -388,7 +389,7 @@ def api_xiangmu_pinglun_add(request):
         add_shijian = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         curson_insert = connection.cursor()
         sql_insert = "insert into xiangmu_pinglun(neirong,u_id,xiangmu_id,riqi,shijian) values ('%s',%s,%s,'%s','%s')" % (
-        neirong, u_id, xiangmu_id, add_riqi, add_shijian)
+            neirong, u_id, xiangmu_id, add_riqi, add_shijian)
         curson_insert.execute(sql_insert)
         # cuowu = "<script>alert('您的评论已经提交，审核后显示！')</script>"
         cuowu = "<script>alert('您的评论已经提交，审核后显示！');window.parent.location='/pc_xiangmu_xiangqing?id=" + str(
@@ -432,7 +433,7 @@ def mem_xiangmu_dingdan_list(request, dijiye):
     for row in rows:
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF"><a href="/pc_xiangmu_xiangqing?id=%s" target="_blank">%s</a></td>' % (
-        row[2], row[3])
+            row[2], row[3])
         biaoge = biaoge + '<td bgcolor="#FFFFFF" height="50">预约日期：%s<br>预约场次：%s</td>' % (row[4], row[6])
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'
         biaoge = biaoge + row[8]
@@ -445,9 +446,9 @@ def mem_xiangmu_dingdan_list(request, dijiye):
         if row[13] == 1:
             biaoge = biaoge + '待支付'
             biaoge = biaoge + '&nbsp;&nbsp;&nbsp;&nbsp;<a href="/api_xiangmu_dingdan_fukuan?id=%s&dijiye=%s">立即付款</a>' % (
-            row[0], dijiye)
+                row[0], dijiye)
             biaoge = biaoge + '&nbsp;&nbsp;&nbsp;&nbsp;<a href="/api_xiangmu_dingdan_del?id=%s&dijiye=%s">取消订单</a>' % (
-            row[0], dijiye)
+                row[0], dijiye)
         if row[13] == 2:
             biaoge = biaoge + '已付款'
         biaoge = biaoge + '</td>'
@@ -543,7 +544,7 @@ def mem_xiangmu_shoucang_list(request, dijiye):
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF" height="27">%s</td>' % row[4]  # 时间
         biaoge = biaoge + '<td bgcolor="#FFFFFF"><a href="/pc_xiangmu_xiangqing?id=%s" target="_blank">%s</a></td>' % (
-        row[2], row[3])  # 会员信息
+            row[2], row[3])  # 会员信息
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'
         biaoge = biaoge + '<a href="/mem_xiangmu_shoucang_del?id=%s&dijiye=%s">删除</a>' % (row[0], dijiye)
         biaoge = biaoge + '</td>'
@@ -611,7 +612,7 @@ def mem_xiangmu_pinglun_list(request, dijiye):
     cursor = connection.cursor()
     sql = "select  pinglun.id as plid,pinglun.riqi,pinglun.neirong,pinglun.yn_shenhe,xm.id as xmid,xm.xinxi_biaoti from xiangmu_pinglun as pinglun,xiangmu as xm " \
           "where pinglun.xiangmu_id=xm.id and pinglun.u_id=%s  order by pinglun.id desc limit %s,%s" % (
-          h_id, int(meiye) * int(dijiye), meiye)
+              h_id, int(meiye) * int(dijiye), meiye)
     print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
@@ -630,7 +631,7 @@ def mem_xiangmu_pinglun_list(request, dijiye):
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF" height="27">%s</td>' % row[1]  # 时间
         biaoge = biaoge + '<td bgcolor="#FFFFFF"><a href="/pc_xiangmu_xiangqing?id=%s" target="_blank">%s</a></td>' % (
-        row[4], row[5])
+            row[4], row[5])
         biaoge = biaoge + '<td bgcolor="#FFFFFF" height="27">%s</td>' % row[2]  # 评论时间
 
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'  # 订单状态 + 处理
@@ -711,7 +712,7 @@ def mem_xiangmu_liulan_list(request, dijiye):
     cursor = connection.cursor()
     sql = "select  liulan.id as llid,liulan.riqi,xm.id as xmid,xm.xinxi_biaoti from xiangmu_liulan as liulan,xiangmu as xm " \
           "where liulan.xiangmu_id=xm.id and liulan.u_id=%s  order by liulan.id desc limit %s,%s" % (
-          h_id, int(meiye) * int(dijiye), meiye)
+              h_id, int(meiye) * int(dijiye), meiye)
     print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
@@ -728,7 +729,7 @@ def mem_xiangmu_liulan_list(request, dijiye):
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF" height="27">%s</td>' % row[1]  # 时间
         biaoge = biaoge + '<td bgcolor="#FFFFFF"><a href="/pc_xiangmu_xiangqing?id=%s" target="_blank">%s</a></td>' % (
-        row[2], row[3])
+            row[2], row[3])
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'  # 订单状态 + 处理
         biaoge = biaoge + '<a href="/mem_xiangmu_liulan_del?id=%s&dijiye=%s">删除</a>' % (row[0], dijiye)
         biaoge = biaoge + '</td>'

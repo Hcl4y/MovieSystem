@@ -8,19 +8,34 @@
     <link rel="stylesheet" href="/static/css/end.css">
     <link rel="stylesheet" href="/static/css/huiyuan_denglu.css">
     <style>
-        .rongqi{ width:980px;display:flex;flex-wrap:wrap;align-content:flex-start;}
-        .xm{  height:120px; background-color:#FFF;padding:10px; box-sizing:border-box; margin:10px 20px 10px 0px; background:#F3F3F3; border-radius:5px;}
+        .rongqi {
+            width: 980px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+
+        .xm {
+            height: 120px;
+            background-color: #FFF;
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 10px 20px 10px 0px;
+            background: #F3F3F3;
+            border-radius: 5px;
+        }
+
         .xm:active {
         }
+
         .xm:hover {
-            box-shadow: 5px 5px 10px  #CCCCCC;
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcb48', endColorstr='#ff9c23',GradientType=0 );
+            box-shadow: 5px 5px 10px #CCCCCC;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcb48', endColorstr='#ff9c23', GradientType=0);
         }
     </style>
 </head>
 <body>
 {% include "pc/toubu.html" %}
-
 
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -29,39 +44,40 @@
         <td width="1200">
 
 
-
             <table width="100%" border="0">
                 <tr>
-                    <td  align="right"><img src="/static/img/bg.png" height="500" ></td>
-                    <td  align="center" width="50%" >
+                    <td align="right"><img src="/static/img/bg.png" height="500"></td>
+                    <td align="center" width="50%">
 
                         <form name="form1" method="post">
                             {{ cuowu|safe }}
                             <div class="denglu">
                                 <div class="denglu_mingcheng">欢迎登陆</div>
                                 <div class="denglu_xiangmu">
-                                    <img src="/static/img/yonghu.png" class="denglu_xiangmu_img" />
+                                    <img src="/static/img/yonghu.png" class="denglu_xiangmu_img"/>
                                     <!--用户名：手机号-->
-                                    <input type="text" placeholder="请输入用户名" class="denglu_xiangmu_input" name="yhm" id="yhm" style="color: white;">
+                                    <input type="text" placeholder="请输入用户名" class="denglu_xiangmu_input" name="yhm"
+                                           id="yhm" style="color: white;">
                                 </div>
                                 <br>
                                 <div class="denglu_xiangmu">
-                                    <img src="/static/img/mima.png" class="denglu_xiangmu_img" />
+                                    <img src="/static/img/mima.png" class="denglu_xiangmu_img"/>
                                     <!--登录密码-->
-                                    <input type="password" placeholder="请输入密码" class="denglu_xiangmu_input" name="mm" id="mm" style="color: white;">
+                                    <input type="password" placeholder="请输入密码" class="denglu_xiangmu_input" name="mm"
+                                           id="mm" style="color: white;">
                                 </div>
 
                                 <br>
                                 <!--登录提交按钮-->
-                                <input  class="denglu_putong" type="submit" value="立即登录" onClick="return check_login();" style="border: 0;outline: none;margin: 0; cursor: pointer;">
+                                <input class="denglu_putong" type="submit" value="立即登录" onClick="return check_login();"
+                                       style="border: 0;outline: none;margin: 0; cursor: pointer;">
 
                                 <!--下面是JS验证和提交代码-->
                                 <script>
                                     //验证用户名和密码是否填写填写;填写后提交到用户登录接口验证
-                                    function check_login()
-                                    {
+                                    function check_login() {
                                         //如果用户名和密码其中任一个都没有填写，提示错误
-                                        if(document.form1.yhm.value=="" || document.form1.mm.value==""){
+                                        if (document.form1.yhm.value == "" || document.form1.mm.value == "") {
                                             alert("请填写你的账户和密码！"); //弹出提示
                                             return false;  //中断执行和提交
                                         }
@@ -81,17 +97,16 @@
                         </form>
 
                     </td>
-                    <td  width="50">&nbsp;</td>
+                    <td width="50">&nbsp;</td>
                 </tr>
             </table>
-
-
 
 
         </td>
         <td>&nbsp;</td>
     </tr>
-</table><br><br><br>
+</table>
+<br><br><br>
 
 
 {% include "pc/weibu.html" %}

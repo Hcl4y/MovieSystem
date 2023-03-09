@@ -21,19 +21,22 @@
                     <td width="200" valign="top">
                         <!--中间宽度1200 左侧200 开始-->
 
-                       <table width="100%" border="0" style="border: 1px dotted gainsboro;" >
+                        <table width="100%" border="0" style="border: 1px dotted gainsboro;">
                             <tr>
-                                <td height="35" style="background:#333; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">新闻分类</td>
+                                <td height="35"
+                                    style="background:#333; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;"
+                                    align="center">新闻分类
+                                </td>
                             </tr>
                             <tr>
-                                <td  style="border-bottom:1px dotted #CCCCCC;padding:10px;"  align="center">
+                                <td style="border-bottom:1px dotted #CCCCCC;padding:10px;" align="center">
                                     <a
-                                        {% if  leixing_id == 0  %}
-                                            class=" fenlei_zuo_xuanzhong "
-                                        {% else %}
-                                            class=" fenlei_zuo_xiangmu "
-                                        {% endif %}
-                                        href="/xinxi_list/0/0">
+                                            {% if  leixing_id == 0 %}
+                                                class=" fenlei_zuo_xuanzhong "
+                                            {% else %}
+                                                class=" fenlei_zuo_xiangmu "
+                                            {% endif %}
+                                                href="/xinxi_list/0/0">
                                         所有分类
                                     </a>
 
@@ -41,30 +44,32 @@
                             </tr>
 
                             {% for fenlei in fenleis_fenlei %}
-                            <tr>
-                                <td  style="border-bottom:1px dotted #CCCCCC;padding:10px;"  align="center">
-                                     <a href="/xinxi_list/0/{{ fenlei.0 }}"
-                                        {% if  fenlei.0 == leixing_id  %}
-                                            class="fenlei_zuo_xiangmu fenlei_zuo_xuanzhong"
-                                        {% else %}
-                                            class="fenlei_zuo_xiangmu"
-                                        {% endif %}
+                                <tr>
+                                    <td style="border-bottom:1px dotted #CCCCCC;padding:10px;" align="center">
+                                        <a href="/xinxi_list/0/{{ fenlei.0 }}"
+                                                {% if  fenlei.0 == leixing_id %}
+                                           class="fenlei_zuo_xiangmu fenlei_zuo_xuanzhong"
+                                                {% else %}
+                                           class="fenlei_zuo_xiangmu"
+                                                {% endif %}
                                         >{{ fenlei.1 }}
-                                    </a>
-                                </td>
-                            </tr>
-                           {% endfor %}
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </table>
 
 
                         <!--中间宽度1200 左侧200 结束-->
                     </td>
                     <td width="5"></td>
-                    <td valign="top" >
+                    <td valign="top">
                         <!--中间宽度1200 右侧 开始-->
-                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;">
                             <tr>
-                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                <td height="35"
+                                    style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;"
+                                    align="center">
                                     信息列表
                                     {% if chaxun %}
                                         <font color="red">(查询：{{ chaxun }})</font>
@@ -73,7 +78,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+                                <td style="padding:5px; line-height:2;" height="340" valign="top">
                                     {{ biaoge|safe }}
                                     {{ caidan|safe }}
                                 </td>

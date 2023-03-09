@@ -7,13 +7,29 @@
     <link rel="stylesheet" href="/static/css/huiyuan_mima.css">
     <link rel="stylesheet" href="/static/css/huiyuan.css">
     <style>
-        .rongqi{ width:980px;display:flex;flex-wrap:wrap;align-content:flex-start;}
-        .xm{  height:120px; background-color:#FFF;padding:10px; box-sizing:border-box; margin:10px 20px 10px 0px; background:#F3F3F3; border-radius:5px;}
+        .rongqi {
+            width: 980px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+
+        .xm {
+            height: 120px;
+            background-color: #FFF;
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 10px 20px 10px 0px;
+            background: #F3F3F3;
+            border-radius: 5px;
+        }
+
         .xm:active {
         }
+
         .xm:hover {
-            box-shadow: 5px 5px 10px  #CCCCCC;
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcb48', endColorstr='#ff9c23',GradientType=0 );
+            box-shadow: 5px 5px 10px #CCCCCC;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcb48', endColorstr='#ff9c23', GradientType=0);
         }
     </style>
 </head>
@@ -33,126 +49,139 @@
                         <!--中间宽度1200 左侧200 结束-->
                     </td>
                     <td width="5"></td>
-                    <td valign="top" >
+                    <td valign="top">
                         <!--中间宽度1200 右侧 开始-->
-                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;" >
+                        <table width="100%" border="0" style="padding:5px; border:1px solid #CCC;">
                             <tr>
-                                <td height="35" style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;" align="center">
+                                <td height="35"
+                                    style="background:#999; border-top-left-radius:10px; border-top-right-radius:10px; font-weight:bold; color:white;"
+                                    align="center">
                                     {{ info.3 }}
                                 </td>
                             </tr>
                             <tr>
-                                <td  style="padding:5px; line-height:2;"  height="340" valign="top">
+                                <td style="padding:5px; line-height:2;" height="340" valign="top">
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" >
-  <tr>
-    <td width="80%" style="padding:10px;color:#666;">
-     发布日期： {{ info.11|date:"Y-m-d" }}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-     阅读：{{ shu_liulan }}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-     收藏：{{ shu_shoucang }}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-     评论：{{ shu_pinglun }}
-    </td>
-    <td  width="20%" style="padding:10px;color:#666;" align="center">
-         <iframe width="0" height="0" frameborder="0" name="frame01" src=""></iframe>
-        <!--下面是JS验证和提交代码-->
-        <script>
-            function shoucang(zxid,h_id)
-            {
-                //alert(zxid + " | " + h_id);
-                frame01.location = "/api_zixun_shoucang?zxid=" + zxid + "&h_id=" + h_id;
-            }
-        </script>
-        {% if h_id %}   <!--登录状态-->
-            <input  type="button"  style="background-color: #399; color:#FFF; padding:8px; border-radius:5px; border:0;" value=" 收藏该资讯 "  onClick=shoucang('{{ zxid }}','{{ h_id }}') >
-        {% else %}      <!--没有登录状态-->
-            <a style="background-color: #F60; color:#FFF; padding:8px; border-radius:5px" onclick=go_login('/mem_login')>登录后收藏</a>
-        {% endif %}
-
-
-
-
-    </td>
-</table> <hr>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0"  bgcolor="#F2F2F2">
-  <tr>
-    <td width="50%" style="padding:10px;">下一篇：
-        {% autoescape off %}{{ shang }}{% endautoescape off %}
-    </td>
-    <td  width="50%" style="padding:10px;">上一篇：
-         {% autoescape off %}{{ xia }}{% endautoescape off %}
-    </td>
-</table>
-
-{#  {{ info.10|linebreaks }}#}
-{% autoescape off %}
-{{ info.10}}
-{% endautoescape off %}
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0"  bgcolor="#F2F2F2">
-  <tr>
-    <td width="50%" style="padding:10px;">下一篇：
-        {% autoescape off %}{{ shang }}{% endautoescape off %}
-    </td>
-    <td  width="50%" style="padding:10px;">上一篇：
-         {% autoescape off %}{{ xia }}{% endautoescape off %}
-    </td>
-</table>
-<br>
-<!--写评论 开始-->
-<form name="form_pinglun">
-<table width="100%" border="0" cellspacing="0" cellpadding="0"  bgcolor="#F2F2F2">
-    <tr>
-        <td   style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC; background-color: #f2f2f2;"  width="10%" align="center">评论内容</td>
-        <td   style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;background-color: #f2f2f2;" align="left" width="90%">
-            <textarea name="neirong" id="neirong" rows="5" cols="70"></textarea>
-        </td>
-    </tr>
-    <tr>
-        <td   style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;background-color: #f2f2f2;"  width="15%" align="center"></td>
-        <td   style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;background-color: #f2f2f2;" align="left" width="85%">
-
-            {% if h_id %}   <!--登录状态-->
-                <input  type="button"  style="background-color: coral; color:#FFF; padding:8px; border-radius:5px; border:0;" value=" 提交评论内容 "
-                    onClick="pinglun('{{ zxid }}','{{ h_id }}')" >
-            {% else %}      <!--没有登录状态-->
-                 <a style="background-color:  #399; color:#FFF; padding:8px; border-radius:5px; cursor:pointer;" onclick=go_login('/mem_login')>提交评论内容</a>
-            {% endif %}
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="80%" style="padding:10px;color:#666;">
+                                                发布日期： {{ info.11|date:"Y-m-d" }}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                                阅读：{{ shu_liulan }}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                                收藏：{{ shu_shoucang }}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                                评论：{{ shu_pinglun }}
+                                            </td>
+                                            <td width="20%" style="padding:10px;color:#666;" align="center">
+                                                <iframe width="0" height="0" frameborder="0" name="frame01"
+                                                        src=""></iframe>
+                                                <!--下面是JS验证和提交代码-->
+                                                <script>
+                                                    function shoucang(zxid, h_id) {
+                                                        //alert(zxid + " | " + h_id);
+                                                        frame01.location = "/api_zixun_shoucang?zxid=" + zxid + "&h_id=" + h_id;
+                                                    }
+                                                </script>
+                                                {% if h_id %}   <!--登录状态-->
+                                                    <input type="button"
+                                                           style="background-color: #399; color:#FFF; padding:8px; border-radius:5px; border:0;"
+                                                           value=" 收藏该资讯 " onClick=shoucang('{{ zxid }}','{{ h_id }}')>
+                                                {% else %}      <!--没有登录状态-->
+                                                    <a style="background-color: #F60; color:#FFF; padding:8px; border-radius:5px"
+                                                       onclick=go_login('/mem_login')>登录后收藏</a>
+                                                {% endif %}
 
 
-            <script language="javascript">
-                function pinglun(zxid,h_id)
-                {
-                    neirong = document.getElementById("neirong").value;
-                    if(neirong=="" || neirong==null){
-                        alert("请填写评论内容！");
-                    }else{
-                        //alert(zxid+" | " + h_id + " | "+neirong);
-                        frame01.location = "/api_zixun_pinglun_add?zxid=" + zxid + "&h_id=" + h_id + "&neirong=" + neirong ;
-                    }
-                }
-            </script>
-            {{ cuowu|safe }}
+                                            </td>
+                                    </table>
+                                    <hr>
 
-        </td>
-    </tr>
-</table>
-</form>
-<!--写评论 开始-->
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#F2F2F2">
+                                        <tr>
+                                            <td width="50%" style="padding:10px;">下一篇：
+                                                {% autoescape off %}{{ shang }}{% endautoescape off %}
+                                            </td>
+                                            <td width="50%" style="padding:10px;">上一篇：
+                                                {% autoescape off %}{{ xia }}{% endautoescape off %}
+                                            </td>
+                                    </table>
 
-<!--评论信息 开始-->
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 10px;">
-    {% for pinglun in rows_pinglun_list %}
-    <tr>
-        <td   style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;">
-            评论时间：<span  style="color:red;"> {{pinglun.2}} </span>&nbsp;&nbsp;|&nbsp;&nbsp;
-            评论内容：{{pinglun.1}}&nbsp;&nbsp;|&nbsp;&nbsp;
-            <span  style="color:#999;">[用户***]</span>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-<!--评论信息 结束-->
+                                    {#  {{ info.10|linebreaks }}#}
+                                    {% autoescape off %}
+                                        {{ info.10 }}
+                                    {% endautoescape off %}
+
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#F2F2F2">
+                                        <tr>
+                                            <td width="50%" style="padding:10px;">下一篇：
+                                                {% autoescape off %}{{ shang }}{% endautoescape off %}
+                                            </td>
+                                            <td width="50%" style="padding:10px;">上一篇：
+                                                {% autoescape off %}{{ xia }}{% endautoescape off %}
+                                            </td>
+                                    </table>
+                                    <br>
+                                    <!--写评论 开始-->
+                                    <form name="form_pinglun">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                               bgcolor="#F2F2F2">
+                                            <tr>
+                                                <td style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC; background-color: #f2f2f2;"
+                                                    width="10%" align="center">评论内容
+                                                </td>
+                                                <td style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;background-color: #f2f2f2;"
+                                                    align="left" width="90%">
+                                                    <textarea name="neirong" id="neirong" rows="5" cols="70"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;background-color: #f2f2f2;"
+                                                    width="15%" align="center"></td>
+                                                <td style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;background-color: #f2f2f2;"
+                                                    align="left" width="85%">
+
+                                                    {% if h_id %}   <!--登录状态-->
+                                                        <input type="button"
+                                                               style="background-color: coral; color:#FFF; padding:8px; border-radius:5px; border:0;"
+                                                               value=" 提交评论内容 "
+                                                               onClick="pinglun('{{ zxid }}','{{ h_id }}')">
+                                                    {% else %}      <!--没有登录状态-->
+                                                        <a style="background-color:  #399; color:#FFF; padding:8px; border-radius:5px; cursor:pointer;"
+                                                           onclick=go_login('/mem_login')>提交评论内容</a>
+                                                    {% endif %}
+
+
+                                                    <script language="javascript">
+                                                        function pinglun(zxid, h_id) {
+                                                            neirong = document.getElementById("neirong").value;
+                                                            if (neirong == "" || neirong == null) {
+                                                                alert("请填写评论内容！");
+                                                            } else {
+                                                                //alert(zxid+" | " + h_id + " | "+neirong);
+                                                                frame01.location = "/api_zixun_pinglun_add?zxid=" + zxid + "&h_id=" + h_id + "&neirong=" + neirong;
+                                                            }
+                                                        }
+                                                    </script>
+                                                    {{ cuowu|safe }}
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                    <!--写评论 开始-->
+
+                                    <!--评论信息 开始-->
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                           style="margin: 10px;">
+                                        {% for pinglun in rows_pinglun_list %}
+                                            <tr>
+                                                <td style="padding:10px 0 10px; border-bottom:1px dotted #CCCCCC;">
+                                                    评论时间：<span style="color:red;"> {{ pinglun.2 }} </span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                                    评论内容：{{ pinglun.1 }}&nbsp;&nbsp;|&nbsp;&nbsp;
+                                                    <span style="color:#999;">[用户***]</span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                    <!--评论信息 结束-->
 
 
                                 </td>
