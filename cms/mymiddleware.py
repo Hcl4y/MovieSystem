@@ -5,6 +5,7 @@ try:
 except ImportError:
     MiddlewareMixin = object  # Django 1.4.x - Django 1.9.x
 
+
 class SimpleMiddleware(MiddlewareMixin):
     def process_request(self, request):
         # if request.path != '/login' and request.path != '/Web/CheckCode/':
@@ -15,4 +16,4 @@ class SimpleMiddleware(MiddlewareMixin):
         print("1111")
         # u_id = request.COOKIES.get("h_id")
         # u_name = request.COOKIES.get("h_name")
-        bbb="abc";
+        bbb = "abc";

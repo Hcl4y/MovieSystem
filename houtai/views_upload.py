@@ -2,17 +2,17 @@ import os
 import time
 import datetime
 
-from django.shortcuts import  render,redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 
 def upload01(request):
     if request.method == "GET":
         domid = request.GET.get("domid")
-        neirong  = {
-            "domid":domid
+        neirong = {
+            "domid": domid
         }
-        return render(request,"houtai/upload/upload01.html",context=neirong)
+        return render(request, "houtai/upload/upload01.html", context=neirong)
 
     if request.method == "POST":
         myfile = request.FILES.get('myfile')
@@ -38,12 +38,13 @@ def upload01(request):
             for chunk in myfile.chunks():
                 f.write(chunk)
 
-        neirong  = {
-            "imgs":file_path
+        neirong = {
+            "imgs": file_path
         }
 
-        #myurl = "<script language='JavaScript' >alert('成功退出！');window.parent.location='/ht';</script>"
-        myurl = "<script language='JavaScript' >window.parent.document.form1.%s.value='%s';</script>" % (domid,file_path)
+        # myurl = "<script language='JavaScript' >alert('成功退出！');window.parent.location='/ht';</script>"
+        myurl = "<script language='JavaScript' >window.parent.document.form1.%s.value='%s';</script>" % (
+        domid, file_path)
         response = HttpResponse(myurl)
         return response
 

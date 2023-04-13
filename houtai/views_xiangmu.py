@@ -8,10 +8,12 @@ from django.utils.timezone import make_aware
 import json
 
 import math
-#热门关键字设定
+
+
+# 热门关键字设定
 def set_key_remen_xinwen(request):
     if request.method == "GET":
-        #id = request.GET.get("id")
+        # id = request.GET.get("id")
         id = 2
         curson = connection.cursor()
         curson.execute("select * from web_key where id=%s" % id)
@@ -23,20 +25,21 @@ def set_key_remen_xinwen(request):
         }
         return render(request, "houtai/xinwen/set_key_remen_xinwen.html", context=neirong)
     if request.method == "POST":
-        #id = request.POST.get("id")
+        # id = request.POST.get("id")
         id = 2
         Mingcheng = request.POST.get("Mingcheng")
-        #Guanjianzi = request.POST.get("Guanjianzi")
-        #Miaoshu = request.POST.get("Miaoshu")
+        # Guanjianzi = request.POST.get("Guanjianzi")
+        # Miaoshu = request.POST.get("Miaoshu")
 
         # 0-id  1-Mingcheng  2-Guanjianzi 3-Miaoshu
         curson = connection.cursor()
-        sql = "update web_key set Mingcheng='%s' where id=%s " % (Mingcheng,  id)
+        sql = "update web_key set Mingcheng='%s' where id=%s " % (Mingcheng, id)
         curson.execute(sql)
-        #return redirect("/set_key_remen?id=%s" % id)
+        # return redirect("/set_key_remen?id=%s" % id)
         return redirect("/set_key_remen_xinwen")
 
-#分类录入和修改
+
+# 分类录入和修改
 def xiangmu_fenlei(request):
     if request.method == "GET":
         id_1ji = request.GET.get("id_1ji")
@@ -67,7 +70,7 @@ def xiangmu_fenlei(request):
             paixu_id = request.POST.get("paixu_id")
             curson = connection.cursor()
             sql = "update xiangmu_fenlei set caidan_mingcheng='%s',paixu_id=%s where id=%s" % (
-            caidan_mingcheng, paixu_id, id_1ji)
+                caidan_mingcheng, paixu_id, id_1ji)
             curson.execute(sql)
         else:
             caidan_mingcheng = request.POST.get("caidan_mingcheng")
@@ -78,7 +81,8 @@ def xiangmu_fenlei(request):
             curson.execute(sql)
         return redirect("/xiangmu_fenlei")
 
-#分类删除 表：0-id    1-caidan_mingcheng   2-paixu_id
+
+# 分类删除 表：0-id    1-caidan_mingcheng   2-paixu_id
 def xiangmu_fenlei_del(request):
     if request.method == "GET":
         id_1ji = request.GET.get("id_1ji")
@@ -88,7 +92,8 @@ def xiangmu_fenlei_del(request):
         curson.execute(sql)
         return redirect("/xiangmu_fenlei")
 
-#项目 电影 录入
+
+# 项目 电影 录入
 def xiangmu_add(request):
     if request.method == "GET":
         curson = connection.cursor()
@@ -100,18 +105,18 @@ def xiangmu_add(request):
         return render(request, "houtai/xiangmu/xiangmu_add.html", context=neirong)
 
     if request.method == "POST":
-        xinxi_lxid = request.POST.get("xinxi_lxid")    #类型
-        xinxi_biaoti = request.POST.get("xinxi_biaoti")#标题
-        jiage = request.POST.get("jiage")              #价格
-        xinxi_riqi = request.POST.get("xinxi_riqi")    #日期
-        #推荐简介
+        xinxi_lxid = request.POST.get("xinxi_lxid")  # 类型
+        xinxi_biaoti = request.POST.get("xinxi_biaoti")  # 标题
+        jiage = request.POST.get("jiage")  # 价格
+        xinxi_riqi = request.POST.get("xinxi_riqi")  # 日期
+        # 推荐简介
         xinxi_jianjie_yn = request.POST.get("jianjie_yn")
         if xinxi_jianjie_yn == "on":
             xinxi_jianjie_yn = 1
         else:
             xinxi_jianjie_yn = 0
         xinxi_jianjie = request.POST.get("xinxi_jianjie")
-        #封面图片
+        # 封面图片
         xinxi_tupian_yn = request.POST.get("tupian_yn")
         if xinxi_tupian_yn == "on":
             xinxi_tupian_yn = 1
@@ -120,7 +125,7 @@ def xiangmu_add(request):
         xinxi_tupian = request.POST.get("xinxi_tupian")
 
         xinxi_neirong = request.POST.get("xinxi_neirong")
-        shichang = request.POST.get("shichang")  #时长
+        shichang = request.POST.get("shichang")  # 时长
 
         add_riqi = time.strftime("%Y-%m-%d", time.localtime())
         add_shijian = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -128,12 +133,14 @@ def xiangmu_add(request):
         curson = connection.cursor()
         sql = "insert into xiangmu(xinxi_lxid,xinxi_biaoti,jiage,xinxi_riqi,xinxi_jianjie_yn,xinxi_jianjie,xinxi_tupian_yn,xinxi_tupian,xinxi_neirong,add_riqi,add_shijian,shichang) " \
               "values (%s,'%s',%s,'%s',%s,'%s',%s,'%s','%s','%s','%s',%s)" \
-              % (xinxi_lxid, xinxi_biaoti,jiage, xinxi_riqi, xinxi_jianjie_yn, xinxi_jianjie, xinxi_tupian_yn, xinxi_tupian,
-                 xinxi_neirong, add_riqi, add_shijian,shichang)
+              % (xinxi_lxid, xinxi_biaoti, jiage, xinxi_riqi, xinxi_jianjie_yn, xinxi_jianjie, xinxi_tupian_yn,
+                 xinxi_tupian,
+                 xinxi_neirong, add_riqi, add_shijian, shichang)
         curson.execute(sql)
         return redirect("/xiangmu_list/0")
 
-#项目 电影 修改
+
+# 项目 电影 修改
 def xiangmu_xiugai(request):
     if request.method == "GET":
         curson_fenzu = connection.cursor()
@@ -151,7 +158,7 @@ def xiangmu_xiugai(request):
             "fenzus": fenzus,
             "info": info,
             "fzid": info[1],
-            "dijiye":dijiye
+            "dijiye": dijiye
         }
         return render(request, "houtai/xiangmu/xiangmu_xiugai.html", context=neirong)
 
@@ -179,17 +186,19 @@ def xiangmu_xiugai(request):
         xinxi_tupian = request.POST.get("xinxi_tupian")
 
         xinxi_neirong = request.POST.get("xinxi_neirong")
-        shichang = request.POST.get("shichang") #时长
+        shichang = request.POST.get("shichang")  # 时长
 
         # 0-id  1-user_name  2-user_password 3-fenzu_id  4-add_date  5-beizhu
         curson = connection.cursor()
         sql = "update xiangmu set xinxi_lxid=%s,xinxi_biaoti='%s',jiage=%s,xinxi_riqi='%s',xinxi_jianjie_yn=%s,xinxi_jianjie='%s'," \
               "xinxi_tupian_yn=%s,xinxi_tupian='%s',xinxi_neirong='%s',shichang=%s where id=%s" % \
-              (xinxi_lxid, xinxi_biaoti,jiage, xinxi_riqi, xinxi_jianjie_yn, xinxi_jianjie, xinxi_tupian_yn, xinxi_tupian,xinxi_neirong,shichang,id)
+              (xinxi_lxid, xinxi_biaoti, jiage, xinxi_riqi, xinxi_jianjie_yn, xinxi_jianjie, xinxi_tupian_yn,
+               xinxi_tupian, xinxi_neirong, shichang, id)
         curson.execute(sql)
         return redirect("/xiangmu_list/%s" % dijiye)
 
-#项目 电影 删除
+
+# 项目 电影 删除
 def xiangmu_del(request):
     # 0-id  1-user_name  2-user_password 3-fenzu_id  4-add_date  5-beizhu
     if request.method == "GET":
@@ -200,7 +209,8 @@ def xiangmu_del(request):
         curson.execute(sql)
         return redirect("/xiangmu_list/%s" % dijiye)
 
-#项目 电影 列表
+
+# 项目 电影 列表
 def xiangmu_list(request, dijiye):
     print("第几页=%s" % dijiye)
     cursor_zongshuju = connection.cursor()
@@ -256,8 +266,9 @@ def xiangmu_list(request, dijiye):
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[4]
 
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">' +row[2]
-        biaoge = biaoge + "<a href='/xiangmu_mulu?xiangmu_id="+str(row[0])+"&xiangmu_mc="+row[2]+"'>【日期和场次安排】</a>"
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">' + row[2]
+        biaoge = biaoge + "<a href='/xiangmu_mulu?xiangmu_id=" + str(row[0]) + "&xiangmu_mc=" + row[
+            2] + "'>【日期和场次安排】</a>"
         biaoge = biaoge + "<br>价格：" + str(row[3]) + " 元"
         biaoge = biaoge + "<br>时长：" + str(row[12]) + " 分钟"
         biaoge = biaoge + '</td>'
@@ -300,21 +311,24 @@ def xiangmu_list(request, dijiye):
 
     return render(request, "houtai/xiangmu/xiangmu_list.html", context=neirong)
 
-#项目 电影 目录
+
+# 项目 电影 目录
 def xiangmu_mulu(request):
     if request.method == "GET":
         xiangmu_id = request.GET.get("xiangmu_id")
         xiangmu_mc = request.GET.get("xiangmu_mc")
-        print("id=%s，名称=%s" % (xiangmu_id,xiangmu_mc))
+        print("id=%s，名称=%s" % (xiangmu_id, xiangmu_mc))
 
-        #读取该本书的1级目录
+        # 读取该本书的1级目录
         curson_mulu1 = connection.cursor()
-        curson_mulu1.execute("select  id,xinxi_biaoti,up_id  from xiangmu_mulu where mulu_jibie=1 and xiangmu_id=%s" %xiangmu_id )
+        curson_mulu1.execute(
+            "select  id,xinxi_biaoti,up_id  from xiangmu_mulu where mulu_jibie=1 and xiangmu_id=%s" % xiangmu_id)
         rows_mulu1 = curson_mulu1.fetchall()
 
-        #读取该本书的2级目录
+        # 读取该本书的2级目录
         curson_mulu2 = connection.cursor()
-        curson_mulu2.execute("select  id,xinxi_biaoti,up_id  from xiangmu_mulu where mulu_jibie=2 and xiangmu_id=%s" %xiangmu_id )
+        curson_mulu2.execute(
+            "select  id,xinxi_biaoti,up_id  from xiangmu_mulu where mulu_jibie=2 and xiangmu_id=%s" % xiangmu_id)
         rows_mulu2 = curson_mulu2.fetchall()
 
         biaoge = ""
@@ -322,12 +336,13 @@ def xiangmu_mulu(request):
         neirong = {
             "rows_mulu1": rows_mulu1,
             "rows_mulu2": rows_mulu2,
-            "xiangmu_id":xiangmu_id,
-            "xiangmu_mc":xiangmu_mc,
+            "xiangmu_id": xiangmu_id,
+            "xiangmu_mc": xiangmu_mc,
         }
         return render(request, "houtai/xiangmu/xiangmu_mulu.html", context=neirong)
 
-#项目 电影 日期安排 录入
+
+# 项目 电影 日期安排 录入
 def mulu1_add(request):
     if request.method == "GET":
         xiangmu_id = request.GET.get("xiangmu_id")  #
@@ -341,18 +356,19 @@ def mulu1_add(request):
     if request.method == "POST":
         xiangmu_id = request.POST.get("xiangmu_id")  #
         xiangmu_mc = request.POST.get("xiangmu_mc")  #
-        xinxi_biaoti = request.POST.get("xinxi_biaoti")#标题
+        xinxi_biaoti = request.POST.get("xinxi_biaoti")  # 标题
         add_riqi = time.strftime("%Y-%m-%d", time.localtime())
         add_shijian = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
         curson = connection.cursor()
         sql = "insert into xiangmu_mulu(xinxi_biaoti,add_riqi,add_shijian,xiangmu_id,xiangmu_mc,mulu_jibie) " \
               "values ('%s','%s','%s',%s,'%s',%s)" \
-              % (xinxi_biaoti, add_riqi, add_shijian,xiangmu_id,xiangmu_mc,1)
+              % (xinxi_biaoti, add_riqi, add_shijian, xiangmu_id, xiangmu_mc, 1)
         curson.execute(sql)
-        return redirect("/xiangmu_mulu?xiangmu_id=%s&xiangmu_mc=%s" % (xiangmu_id,xiangmu_mc))
+        return redirect("/xiangmu_mulu?xiangmu_id=%s&xiangmu_mc=%s" % (xiangmu_id, xiangmu_mc))
 
-#项目 电影 日期安排 修改
+
+# 项目 电影 日期安排 修改
 def mulu1_xiugai(request):
     if request.method == "GET":
         id = request.GET.get("id")
@@ -367,7 +383,7 @@ def mulu1_xiugai(request):
         neirong = {
             "xiangmu_id": xiangmu_id,
             "xiangmu_mc": xiangmu_mc,
-            "info":info,
+            "info": info,
         }
         return render(request, "houtai/xiangmu/mulu1_xiugai.html", context=neirong)
 
@@ -376,15 +392,16 @@ def mulu1_xiugai(request):
         xiangmu_id = request.POST.get("xiangmu_id")  #
         xiangmu_mc = request.POST.get("xiangmu_mc")  #
 
-        xinxi_biaoti = request.POST.get("xinxi_biaoti")#标题
+        xinxi_biaoti = request.POST.get("xinxi_biaoti")  # 标题
 
         curson = connection.cursor()
         sql = "update xiangmu_mulu set xinxi_biaoti='%s'  where xiangmu_id=%s and id=%s" % \
-              (xinxi_biaoti, xiangmu_id,id)
+              (xinxi_biaoti, xiangmu_id, id)
         curson.execute(sql)
         return redirect("/xiangmu_mulu?xiangmu_id=%s&xiangmu_mc=%s" % (xiangmu_id, xiangmu_mc))
 
-#项目 电影 日期排期和场次 删除
+
+# 项目 电影 日期排期和场次 删除
 def mulu_del(request):
     if request.method == "GET":
         id = request.GET.get("id")
@@ -392,11 +409,12 @@ def mulu_del(request):
         xiangmu_mc = request.GET.get("xiangmu_mc")
 
         curson = connection.cursor()
-        sql = "delete from xiangmu_mulu where xiangmu_id=%s and id=%s" % (xiangmu_id,id)
+        sql = "delete from xiangmu_mulu where xiangmu_id=%s and id=%s" % (xiangmu_id, id)
         curson.execute(sql)
         return redirect("/xiangmu_mulu?xiangmu_id=%s&xiangmu_mc=%s" % (xiangmu_id, xiangmu_mc))
 
-#项目 电影 日期下的场次 录入
+
+# 项目 电影 日期下的场次 录入
 def mulu2_add(request):
     if request.method == "GET":
         xiangmu_id = request.GET.get("xiangmu_id")
@@ -418,7 +436,7 @@ def mulu2_add(request):
         up_id = request.POST.get("up_id")
         up_mc = request.POST.get("up_mc")
 
-        xinxi_biaoti = request.POST.get("xinxi_biaoti") #标题
+        xinxi_biaoti = request.POST.get("xinxi_biaoti")  # 标题
 
         yingting = request.POST.get("yingting")
         meipai = request.POST.get("meipai")
@@ -431,11 +449,13 @@ def mulu2_add(request):
         curson = connection.cursor()
         sql = "insert into xiangmu_mulu(xinxi_biaoti,add_riqi,add_shijian,xiangmu_id,xiangmu_mc,mulu_jibie,up_id,up_mc,yingting,meipai,jihang,zongshu) " \
               "values ('%s','%s','%s',%s,'%s',%s,%s,'%s',%s,%s,%s,%s)" \
-              % (xinxi_biaoti,add_riqi,add_shijian,xiangmu_id,xiangmu_mc,2,up_id,up_mc,yingting,meipai,jihang,zongshu)
+              % (xinxi_biaoti, add_riqi, add_shijian, xiangmu_id, xiangmu_mc, 2, up_id, up_mc, yingting, meipai, jihang,
+                 zongshu)
         curson.execute(sql)
-        return redirect("/xiangmu_mulu?xiangmu_id=%s&xiangmu_mc=%s" % (xiangmu_id,xiangmu_mc))
+        return redirect("/xiangmu_mulu?xiangmu_id=%s&xiangmu_mc=%s" % (xiangmu_id, xiangmu_mc))
 
-#项目 影 日期下的场次 修改
+
+# 项目 影 日期下的场次 修改
 def mulu2_xiugai(request):
     if request.method == "GET":
         id = request.GET.get("id")
@@ -450,7 +470,7 @@ def mulu2_xiugai(request):
         neirong = {
             "xiangmu_id": xiangmu_id,
             "xiangmu_mc": xiangmu_mc,
-            "info":info,
+            "info": info,
         }
         return render(request, "houtai/xiangmu/mulu2_xiugai.html", context=neirong)
 
@@ -459,7 +479,7 @@ def mulu2_xiugai(request):
         xiangmu_id = request.POST.get("xiangmu_id")  #
         xiangmu_mc = request.POST.get("xiangmu_mc")  #
 
-        xinxi_biaoti = request.POST.get("xinxi_biaoti") #标题
+        xinxi_biaoti = request.POST.get("xinxi_biaoti")  # 标题
 
         yingting = request.POST.get("yingting")
         meipai = request.POST.get("meipai")
@@ -468,13 +488,13 @@ def mulu2_xiugai(request):
 
         curson = connection.cursor()
         sql = "update xiangmu_mulu set xinxi_biaoti='%s',yingting=%s,meipai=%s,jihang=%s,zongshu=%s  where xiangmu_id=%s and id=%s" % \
-              (xinxi_biaoti,yingting,meipai,jihang,zongshu, xiangmu_id,id)
+              (xinxi_biaoti, yingting, meipai, jihang, zongshu, xiangmu_id, id)
         curson.execute(sql)
         return redirect("/xiangmu_mulu?xiangmu_id=%s&xiangmu_mc=%s" % (xiangmu_id, xiangmu_mc))
 
 
 ####################################################################################################################
-#订单列表
+# 订单列表
 def xiangmu_dingdan_list(request, dijiye):
     print("第几页=%s" % dijiye)
     cursor_zongshuju = connection.cursor()
@@ -515,20 +535,22 @@ def xiangmu_dingdan_list(request, dijiye):
 
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % huiyuan  # 会员信息
-        biaoge = biaoge + '<td bgcolor="#FFFFFF"><a href="/pc_dianzishu_xiangqing?id=%s" target="_blank">%s</a></td>' % ( row[2], row[3])
-        biaoge = biaoge + '<td bgcolor="#FFFFFF" height="50">预约日期：%s<br>预约场次：%s</td>' %  (row[4],row[6] )
+        biaoge = biaoge + '<td bgcolor="#FFFFFF"><a href="/pc_dianzishu_xiangqing?id=%s" target="_blank">%s</a></td>' % (
+            row[2], row[3])
+        biaoge = biaoge + '<td bgcolor="#FFFFFF" height="50">预约日期：%s<br>预约场次：%s</td>' % (row[4], row[6])
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'
         biaoge = biaoge + row[8]
         biaoge = biaoge + '</td>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'
-        biaoge = biaoge + '费用：%s 元 <br>票数：%s 张' %(row[10],row[9])
+        biaoge = biaoge + '费用：%s 元 <br>票数：%s 张' % (row[10], row[9])
         biaoge = biaoge + '</td>'
 
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'
-        if row[13] == 1 :
+        if row[13] == 1:
             biaoge = biaoge + '待支付'
-            biaoge = biaoge + '&nbsp;&nbsp;&nbsp;&nbsp;<a href="/api_dianying_dingdan_del?id=%s&dijiye=%s">取消订单</a>' % (row[0], dijiye)
-        if row[13] == 2 :
+            biaoge = biaoge + '&nbsp;&nbsp;&nbsp;&nbsp;<a href="/api_dianying_dingdan_del?id=%s&dijiye=%s">取消订单</a>' % (
+                row[0], dijiye)
+        if row[13] == 2:
             biaoge = biaoge + '已付款'
         biaoge = biaoge + '</td>'
         biaoge = biaoge + '<tr><td colspan=6  style="padding:1px" bgcolor="gray"></td></tr>'
@@ -551,7 +573,7 @@ def xiangmu_dingdan_list(request, dijiye):
 
     caidan = caidan + "&nbsp;&nbsp;总数据：%s | " % zongshuju
     caidan = caidan + "每页：%s | " % meiye
-    caidan = caidan + "当前页数：%s | " % (int(dijiye)+1)
+    caidan = caidan + "当前页数：%s | " % (int(dijiye) + 1)
     caidan = caidan + "总页数：%s  " % yeshu
     caidan = caidan + ""
 
@@ -563,7 +585,8 @@ def xiangmu_dingdan_list(request, dijiye):
 
     return render(request, "houtai/xiangmu/xiangmu_dingdan_list.html", context=neirong)
 
-#订单删除
+
+# 订单删除
 def xiangmu_dingdan_del(request):
     if request.method == "GET":
         id = request.GET.get("id")
@@ -574,7 +597,8 @@ def xiangmu_dingdan_del(request):
         curson.execute(sql)
         return redirect("/xiangmu_dingdan_list/%s" % dijiye)
 
-#评论列表
+
+# 评论列表
 def xiangmu_pinglun_list(request, dijiye):
     print("第几页=%s" % dijiye)
     cursor_zongshuju = connection.cursor()
@@ -616,20 +640,19 @@ def xiangmu_pinglun_list(request, dijiye):
         huiyuan = huiyuan + tmp_huiyuan[1]
 
         biaoge = biaoge + '<tr>'
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' %  row[5] #评论时间
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' %  huiyuan #会员信息
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' %  row[3]  #内容
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[5]  # 评论时间
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % huiyuan  # 会员信息
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[3]  # 内容
 
-
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">' #状态 + 处理
-        #状态：0待处理，1拒绝，2通过
-        if row[6]==0:
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">'  # 状态 + 处理
+        # 状态：0待处理，1拒绝，2通过
+        if row[6] == 0:
             biaoge = biaoge + "0-等待审核 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;"
             biaoge = biaoge + '<a href="/xiangmu_pinglun_chuli?id=%s&dijiye=%s">评论处理</a>' % (row[0], dijiye)
-        if row[6]==1:
+        if row[6] == 1:
             biaoge = biaoge + "1-审核拒绝 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;"
             biaoge = biaoge + '<a href="/xiangmu_pinglun_chuli?id=%s&dijiye=%s">评论处理</a>' % (row[0], dijiye)
-        if row[6]==2:
+        if row[6] == 2:
             biaoge = biaoge + "2-审核通过 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;"
             biaoge = biaoge + '<a href="/xiangmu_pinglun_chuli?id=%s&dijiye=%s">评论处理</a>' % (row[0], dijiye)
 
@@ -655,7 +678,7 @@ def xiangmu_pinglun_list(request, dijiye):
 
     caidan = caidan + "&nbsp;&nbsp;总数据：%s | " % zongshuju
     caidan = caidan + "每页：%s | " % meiye
-    caidan = caidan + "当前页数：%s | " % (int(dijiye)+1)
+    caidan = caidan + "当前页数：%s | " % (int(dijiye) + 1)
     caidan = caidan + "总页数：%s  " % yeshu
     caidan = caidan + ""
 
@@ -667,10 +690,10 @@ def xiangmu_pinglun_list(request, dijiye):
 
     return render(request, "houtai/xiangmu/xiangmu_pinglun_list.html", context=neirong)
 
-#评论处理
+
+# 评论处理
 def xiangmu_pinglun_chuli(request):
     if request.method == "GET":
-
         id = request.GET.get("id")
         dijiye = request.GET.get("dijiye")
         curson = connection.cursor()
@@ -678,8 +701,8 @@ def xiangmu_pinglun_chuli(request):
         info = curson.fetchone()
 
         neirong = {
-            "id":id,
-            "dijiye":dijiye,
+            "id": id,
+            "dijiye": dijiye,
             "yn_shenhe": info[6],
             "shenhe_beizhu": info[7]
         }
@@ -694,6 +717,6 @@ def xiangmu_pinglun_chuli(request):
 
         curson = connection.cursor()
         sql = "update xiangmu_pinglun set yn_shenhe=%s,shenhe_beizhu='%s' where id=%s" % \
-              (yn_shenhe, shenhe_beizhu,id)
+              (yn_shenhe, shenhe_beizhu, id)
         curson.execute(sql)
         return redirect("/xiangmu_pinglun_list/%s" % dijiye)

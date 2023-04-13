@@ -126,7 +126,7 @@ def ht_left2(request):
     caidan = ""
     curson_2ji = connection.cursor()
     sql_2ji = "select * from quanxian_caidan where caidan_jibie=2 and caidan_suoshu=%s  and id in(0%s0)" % (
-    id_1ji, request.COOKIES.get("quanxian2"))
+        id_1ji, request.COOKIES.get("quanxian2"))
     curson_2ji.execute(sql_2ji)
     list2 = curson_2ji.fetchall()
     if list2:
@@ -137,7 +137,7 @@ def ht_left2(request):
             # 读取该2级菜单下  > 所有3级菜单
             curson_3ji = connection.cursor()
             sql_3ji = "select * from quanxian_caidan where caidan_jibie=3 and caidan_suoshu=%s and id in(0%s0)" % (
-            row2[0], request.COOKIES.get("quanxian3"))
+                row2[0], request.COOKIES.get("quanxian3"))
             curson_3ji.execute(sql_3ji)
             list3 = curson_3ji.fetchall()
             if list3:
