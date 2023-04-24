@@ -44,7 +44,7 @@ def upload01(request):
 
         # myurl = "<script language='JavaScript' >alert('成功退出！');window.parent.location='/ht';</script>"
         myurl = "<script language='JavaScript' >window.parent.document.form1.%s.value='%s';</script>" % (
-        domid, file_path)
+            domid, file_path)
         response = HttpResponse(myurl)
         return response
 

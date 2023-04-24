@@ -8,10 +8,12 @@ from django.utils.timezone import make_aware
 import json
 
 import math
-#热门关键字设定
+
+
+# 热门关键字设定
 def set_key_remen_xinwen(request):
     if request.method == "GET":
-        #id = request.GET.get("id")
+        # id = request.GET.get("id")
         id = 2
         curson = connection.cursor()
         curson.execute("select * from web_key where id=%s" % id)
@@ -23,18 +25,19 @@ def set_key_remen_xinwen(request):
         }
         return render(request, "houtai/xinwen/set_key_remen_xinwen.html", context=neirong)
     if request.method == "POST":
-        #id = request.POST.get("id")
+        # id = request.POST.get("id")
         id = 2
         Mingcheng = request.POST.get("Mingcheng")
-        #Guanjianzi = request.POST.get("Guanjianzi")
-        #Miaoshu = request.POST.get("Miaoshu")
+        # Guanjianzi = request.POST.get("Guanjianzi")
+        # Miaoshu = request.POST.get("Miaoshu")
 
         # 0-id  1-Mingcheng  2-Guanjianzi 3-Miaoshu
         curson = connection.cursor()
-        sql = "update web_key set Mingcheng='%s' where id=%s " % (Mingcheng,  id)
+        sql = "update web_key set Mingcheng='%s' where id=%s " % (Mingcheng, id)
         curson.execute(sql)
-        #return redirect("/set_key_remen?id=%s" % id)
+        # return redirect("/set_key_remen?id=%s" % id)
         return redirect("/set_key_remen_xinwen")
+
 
 def xinwen_fenlei(request):
     if request.method == "GET":
@@ -66,7 +69,7 @@ def xinwen_fenlei(request):
             paixu_id = request.POST.get("paixu_id")
             curson = connection.cursor()
             sql = "update xinwen_fenlei set caidan_mingcheng='%s',paixu_id=%s where id=%s" % (
-            caidan_mingcheng, paixu_id, id_1ji)
+                caidan_mingcheng, paixu_id, id_1ji)
             curson.execute(sql)
         else:
             caidan_mingcheng = request.POST.get("caidan_mingcheng")
@@ -135,6 +138,7 @@ def xinwen_add(request):
         curson.execute(sql)
         return redirect("/xinwen_list/0")
 
+
 # 新闻列表
 # 【xinwen_fenlei】 0-id  1-caidan_mingcheng  2-caidan_lujing 3-caidan_jibie  4-caidan_suoshu  5-paixu_id
 # 【xinwen】0-id  1-xinxi_lxid1  2-xinxi_lxid2  3-xinxi_biaoti  4-xinxi_riqi 5-xinxi_jianjie_yn 6-xinxi_jianjie
@@ -157,7 +161,7 @@ def xinwen_xiugai(request):
             "fenzus": fenzus,
             "info": info,
             "fzid": info[1],
-            "dijiye":dijiye
+            "dijiye": dijiye
         }
         return render(request, "houtai/xinwen/xinwen_xiugai.html", context=neirong)
 
@@ -189,9 +193,11 @@ def xinwen_xiugai(request):
         curson = connection.cursor()
         sql = "update xinwen set xinxi_lxid1=%s,xinxi_biaoti='%s',xinxi_riqi='%s',xinxi_jianjie_yn=%s,xinxi_jianjie='%s'," \
               "xinxi_tupian_yn=%s,xinxi_tupian='%s',xinxi_neirong='%s' where id=%s" % \
-              (xinxi_lxid, xinxi_biaoti, xinxi_riqi, xinxi_jianjie_yn, xinxi_jianjie, xinxi_tupian_yn, xinxi_tupian,xinxi_neirong,id)
+              (xinxi_lxid, xinxi_biaoti, xinxi_riqi, xinxi_jianjie_yn, xinxi_jianjie, xinxi_tupian_yn, xinxi_tupian,
+               xinxi_neirong, id)
         curson.execute(sql)
         return redirect("/xinwen_list/%s" % dijiye)
+
 
 # 新闻列表
 # 【xinwen_fenlei】 0-id  1-caidan_mingcheng  2-caidan_lujing 3-caidan_jibie  4-caidan_suoshu  5-paixu_id
@@ -255,8 +261,8 @@ def xinwen_list(request, dijiye):
             tmp_tuijian = "有"
         print(tmp_tuijian)
 
-        tmp_tupian =""
-        if  row[7] == 1:
+        tmp_tupian = ""
+        if row[7] == 1:
             tmp_tupian = "有"
 
         curson = connection.cursor()
@@ -270,8 +276,8 @@ def xinwen_list(request, dijiye):
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % tmp_tuijian
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % tmp_tupian
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'
-        biaoge = biaoge + '<a href="/xinwen_xiugai?id=%s&dijiye=%s">修改</a>&nbsp;&nbsp;' % (row[0],dijiye)
-        biaoge = biaoge + '| &nbsp;&nbsp;<a href="/xinwen_del?id=%s&dijiye=%s">删除</a>' % (row[0],dijiye)
+        biaoge = biaoge + '<a href="/xinwen_xiugai?id=%s&dijiye=%s">修改</a>&nbsp;&nbsp;' % (row[0], dijiye)
+        biaoge = biaoge + '| &nbsp;&nbsp;<a href="/xinwen_del?id=%s&dijiye=%s">删除</a>' % (row[0], dijiye)
         biaoge = biaoge + '</td>'
         biaoge = biaoge + '</tr>'
     biaoge = biaoge + '</table>'
@@ -292,7 +298,7 @@ def xinwen_list(request, dijiye):
 
     caidan = caidan + "&nbsp;&nbsp;总数据：%s | " % zongshuju
     caidan = caidan + "每页：%s | " % meiye
-    caidan = caidan + "当前页数：%s | " % (int(dijiye)+1)
+    caidan = caidan + "当前页数：%s | " % (int(dijiye) + 1)
     caidan = caidan + "总页数：%s  " % yeshu
     caidan = caidan + ""
 
@@ -305,7 +311,7 @@ def xinwen_list(request, dijiye):
     return render(request, "houtai/xinwen/xinwen_list.html", context=neirong)
 
 
-#评论列表
+# 评论列表
 def xinwen_pinglun_list(request, dijiye):
     print("第几页=%s" % dijiye)
     cursor_zongshuju = connection.cursor()
@@ -347,21 +353,20 @@ def xinwen_pinglun_list(request, dijiye):
         huiyuan = huiyuan + tmp_huiyuan[1]
 
         biaoge = biaoge + '<tr>'
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' %  row[5] #评论时间
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' %  huiyuan #会员信息
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' %  row[3]  #内容
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[5]  # 评论时间
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % huiyuan  # 会员信息
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[3]  # 内容
 
-
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">' #订单状态 + 处理
-        #1在购物车，还没下单；2下单，没有付款；3已经付款，还没发货；4已经发货，等待客户收货；5客户收货
-        #biaoge = biaoge + str(row[7])
-        if row[6]==0:
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">'  # 订单状态 + 处理
+        # 1在购物车，还没下单；2下单，没有付款；3已经付款，还没发货；4已经发货，等待客户收货；5客户收货
+        # biaoge = biaoge + str(row[7])
+        if row[6] == 0:
             biaoge = biaoge + "0-等待审核 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;"
             biaoge = biaoge + '<a href="/xinwen_pinglun_chuli?id=%s&dijiye=%s">评论处理</a>' % (row[0], dijiye)
-        if row[6]==1:
+        if row[6] == 1:
             biaoge = biaoge + "1-审核拒绝 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;"
             biaoge = biaoge + '<a href="/xinwen_pinglun_chuli?id=%s&dijiye=%s">评论处理</a>' % (row[0], dijiye)
-        if row[6]==2:
+        if row[6] == 2:
             biaoge = biaoge + "2-审核通过 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;"
             biaoge = biaoge + '<a href="/xinwen_pinglun_chuli?id=%s&dijiye=%s">评论处理</a>' % (row[0], dijiye)
 
@@ -387,7 +392,7 @@ def xinwen_pinglun_list(request, dijiye):
 
     caidan = caidan + "&nbsp;&nbsp;总数据：%s | " % zongshuju
     caidan = caidan + "每页：%s | " % meiye
-    caidan = caidan + "当前页数：%s | " % (int(dijiye)+1)
+    caidan = caidan + "当前页数：%s | " % (int(dijiye) + 1)
     caidan = caidan + "总页数：%s  " % yeshu
     caidan = caidan + ""
 
@@ -399,10 +404,10 @@ def xinwen_pinglun_list(request, dijiye):
 
     return render(request, "houtai/xinwen/xinwen_pinglun_list.html", context=neirong)
 
-#评论处理
+
+# 评论处理
 def xinwen_pinglun_chuli(request):
     if request.method == "GET":
-
         id = request.GET.get("id")
         dijiye = request.GET.get("dijiye")
         curson = connection.cursor()
@@ -410,8 +415,8 @@ def xinwen_pinglun_chuli(request):
         info = curson.fetchone()
 
         neirong = {
-            "id":id,
-            "dijiye":dijiye,
+            "id": id,
+            "dijiye": dijiye,
             "yn_shenhe": info[5],
             "shenhe_beizhu": info[6]
         }
@@ -433,6 +438,6 @@ def xinwen_pinglun_chuli(request):
         # 12-beizhu_fahuo  13-beizhu_caozuo  14-pinglun_yn  15-pinglun_id
         curson = connection.cursor()
         sql = "update xinwen_pinglun set yn_shenhe=%s,shenhe_beizhu='%s' where id=%s" % \
-              (yn_shenhe, shenhe_beizhu,id)
+              (yn_shenhe, shenhe_beizhu, id)
         curson.execute(sql)
         return redirect("/xinwen_pinglun_list/%s" % dijiye)

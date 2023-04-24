@@ -514,7 +514,7 @@ def xiangmu_dingdan_list(request, dijiye):
     print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
-
+    print(rows)
     biaoge = ''
     biaoge = biaoge + '<table width="100%" border="0" cellspacing="1" cellpadding="5"  align="center" bgcolor="#F6F6F6">'
     biaoge = biaoge + '<tr>'
@@ -529,8 +529,10 @@ def xiangmu_dingdan_list(request, dijiye):
     for row in rows:
         huiyuan = ""
         curson_huiyuan = connection.cursor()
+        # print('row[1]:' + str(row[1]))
         curson_huiyuan.execute("select * from huiyuan where id=%s" % row[1])
         tmp_huiyuan = curson_huiyuan.fetchone()
+        # print(tmp_huiyuan[1])
         huiyuan = huiyuan + tmp_huiyuan[1]
 
         biaoge = biaoge + '<tr>'
@@ -605,20 +607,12 @@ def xiangmu_pinglun_list(request, dijiye):
     sql_zongshuju = "select count(1) from xiangmu_pinglun"
     cursor_zongshuju.execute(sql_zongshuju)
     zongshuju = cursor_zongshuju.fetchone()[0]
-    print("总的数据= %s 条" % zongshuju)  # 12
-
     meiye = 5
     yeshu = math.ceil(zongshuju / meiye)
-
-    print("每页数据 =%s 条" % meiye)
-    print("有多少页 =%s " % yeshu)
-
     cursor = connection.cursor()
     sql = "select * from xiangmu_pinglun order by id desc limit %s,%s" % (int(meiye) * int(dijiye), meiye)
-    print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
-
     biaoge = ''
     biaoge = biaoge + '<table width="100%" border="0" cellspacing="1" cellpadding="5"  align="center" bgcolor="#F6F6F6">'
     biaoge = biaoge + '<tr>'
@@ -627,23 +621,17 @@ def xiangmu_pinglun_list(request, dijiye):
     biaoge = biaoge + '<td bgcolor="#E0F3FF"  width="25%">内容</td>'
     biaoge = biaoge + '<td bgcolor="#E0F3FF"  width="25%">状态 | 操作</td>'
     biaoge = biaoge + '</tr>'
-
     for row in rows:
         huiyuan = ""
         curson_huiyuan = connection.cursor()
         curson_huiyuan.execute("select * from huiyuan where id=%s" % row[1])
         tmp_huiyuan = curson_huiyuan.fetchone()
         print(tmp_huiyuan[0])
-        # if tmp_huiyuan[6]:
-        #      huiyuan =  huiyuan + "<img src="+ tmp_huiyuan[6] +" height=50><br>" + tmp_huiyuan[10]
-        # else:
         huiyuan = huiyuan + tmp_huiyuan[1]
-
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[5]  # 评论时间
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % huiyuan  # 会员信息
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[3]  # 内容
-
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'  # 状态 + 处理
         # 状态：0待处理，1拒绝，2通过
         if row[6] == 0:

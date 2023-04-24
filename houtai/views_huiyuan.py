@@ -9,6 +9,7 @@ import json
 
 import math
 
+
 # huiyuan_fenlei 表：0-id    1-caidan_mingcheng   2-caidan_lujing   3-caidan_jibie   4-caidan_suoshu   5-paixu_id
 def huiyuan_fenlei(request):
     if request.method == "GET":
@@ -40,7 +41,7 @@ def huiyuan_fenlei(request):
             paixu_id = request.POST.get("paixu_id")
             curson = connection.cursor()
             sql = "update huiyuan_fenlei set caidan_mingcheng='%s',paixu_id=%s where id=%s" % (
-            caidan_mingcheng, paixu_id, id_1ji)
+                caidan_mingcheng, paixu_id, id_1ji)
             curson.execute(sql)
         else:
             caidan_mingcheng = request.POST.get("caidan_mingcheng")
@@ -63,7 +64,6 @@ def huiyuan_fenlei_del(request):
 
 
 ######################################
-
 
 
 # 【huiyuan_fenlei】 0-id  1-caidan_mingcheng  2-caidan_lujing 3-caidan_jibie  4-caidan_suoshu  5-paixu_id
@@ -106,11 +106,11 @@ def huiyuan_list(request, dijiye):
     for row in rows:
         tmp_leixing = "普通"
         if row[1]:
-           pass
+            pass
         else:
             tmp_leixing = "<b>微信</b>"
 
-        info_putong= ""
+        info_putong = ""
         if row[1]:
             info_putong = info_putong + "手机：" + row[1]
 
@@ -126,10 +126,11 @@ def huiyuan_list(request, dijiye):
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[18]
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[1]
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">姓名：%s（%s）  <br>QQ：%s <br>Email：%s  </td>' % (row[4],row[5],row[7],row[8])
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">姓名：%s（%s）  <br>QQ：%s <br>Email：%s  </td>' % (
+        row[4], row[5], row[7], row[8])
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[9]
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'
-        biaoge = biaoge + '<a href="/huiyuan_del?id=%s&dijiye=%s">删除</a>' % (row[0],dijiye)
+        biaoge = biaoge + '<a href="/huiyuan_del?id=%s&dijiye=%s">删除</a>' % (row[0], dijiye)
         biaoge = biaoge + '</td>'
         biaoge = biaoge + '</tr>'
     biaoge = biaoge + '</table>'
@@ -150,7 +151,7 @@ def huiyuan_list(request, dijiye):
 
     caidan = caidan + "&nbsp;&nbsp;总数据：%s | " % zongshuju
     caidan = caidan + "每页：%s | " % meiye
-    caidan = caidan + "当前页数：%s | " % (int(dijiye)+1)
+    caidan = caidan + "当前页数：%s | " % (int(dijiye) + 1)
     caidan = caidan + "总页数：%s  " % yeshu
     caidan = caidan + ""
 
@@ -161,6 +162,7 @@ def huiyuan_list(request, dijiye):
     }
 
     return render(request, "houtai/huiyuan/huiyuan_list.html", context=neirong)
+
 
 def huiyuan_del(request):
     # 0-id  1-user_name  2-user_password 3-fenzu_id  4-add_date  5-beizhu

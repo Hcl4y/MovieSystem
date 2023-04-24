@@ -8,10 +8,12 @@ from django.utils.timezone import make_aware
 import json
 
 import math
-#热门关键字设定
+
+
+# 热门关键字设定
 def set_key_remen_chanpin(request):
     if request.method == "GET":
-        #id = request.GET.get("id")
+        # id = request.GET.get("id")
         id = 2
         curson = connection.cursor()
         curson.execute("select * from web_key where id=%s" % id)
@@ -23,18 +25,19 @@ def set_key_remen_chanpin(request):
         }
         return render(request, "houtai/chanpin/set_key_remen_chanpin.html", context=neirong)
     if request.method == "POST":
-        #id = request.POST.get("id")
+        # id = request.POST.get("id")
         id = 2
         Mingcheng = request.POST.get("Mingcheng")
-        #Guanjianzi = request.POST.get("Guanjianzi")
-        #Miaoshu = request.POST.get("Miaoshu")
+        # Guanjianzi = request.POST.get("Guanjianzi")
+        # Miaoshu = request.POST.get("Miaoshu")
 
         # 0-id  1-Mingcheng  2-Guanjianzi 3-Miaoshu
         curson = connection.cursor()
-        sql = "update web_key set Mingcheng='%s' where id=%s " % (Mingcheng,  id)
+        sql = "update web_key set Mingcheng='%s' where id=%s " % (Mingcheng, id)
         curson.execute(sql)
-        #return redirect("/set_key_remen?id=%s" % id)
+        # return redirect("/set_key_remen?id=%s" % id)
         return redirect("/set_key_remen_chanpin")
+
 
 def chanpin_fenlei(request):
     if request.method == "GET":
@@ -66,7 +69,7 @@ def chanpin_fenlei(request):
             paixu_id = request.POST.get("paixu_id")
             curson = connection.cursor()
             sql = "update cp_leixing set caidan_mingcheng='%s',paixu_id=%s where id=%s" % (
-            caidan_mingcheng, paixu_id, id_1ji)
+                caidan_mingcheng, paixu_id, id_1ji)
             curson.execute(sql)
         else:
             caidan_mingcheng = request.POST.get("caidan_mingcheng")
@@ -89,7 +92,7 @@ def chanpin_fenlei_del(request):
 
 
 ######################################
-#产品 添加
+# 产品 添加
 def chanpin_add(request):
     if request.method == "GET":
         # 【xinwen_fenlei】 0-id  1-caidan_mingcheng  2-caidan_lujing 3-caidan_jibie  4-caidan_suoshu  5-paixu_id
@@ -135,47 +138,40 @@ def chanpin_add(request):
         curson.execute(sql)
         return redirect("/chanpin_list/0")
 
+
 # 产品 修改
 # 【xinwen_fenlei】 0-id  1-caidan_mingcheng  2-caidan_lujing 3-caidan_jibie  4-caidan_suoshu  5-paixu_id
 # 【xinwen】0-id  1-xinxi_lxid1  2-xinxi_lxid2  3-xinxi_biaoti  4-xinxi_riqi 5-xinxi_jianjie_yn 6-xinxi_jianjie
 # 7-xinxi_tupian_yn   8-xinxi_tupian  9-xinxi_ding  10-xinxi_neirong  11-add_riqi  12-add_shijian
 def chanpin_xiugai(request):
     if request.method == "GET":
-        # 0-id  1-user_name  2-user_password 3-fenzu_id  4-add_date  5-beizhu
         curson_fenzu = connection.cursor()
         curson_fenzu.execute("select * from cp_leixing")
         fenzus = curson_fenzu.fetchall()
-
         id = request.GET.get("id")
         dijiye = request.GET.get("dijiye")
         curson = connection.cursor()
         curson.execute("select * from cp where id=%s" % id)
         info = curson.fetchone()
-        print(info[3])
-
         neirong = {
             "fenzus": fenzus,
             "info": info,
             "fzid": info[1],
-            "dijiye":dijiye
+            "dijiye": dijiye
         }
         return render(request, "houtai/chanpin/chanpin_xiugai.html", context=neirong)
-
     if request.method == "POST":
         id = request.POST.get("id")
         dijiye = request.POST.get("dijiye")
-
         xinxi_lxid = request.POST.get("xinxi_lxid")
         xinxi_biaoti = request.POST.get("xinxi_biaoti")
         xinxi_riqi = request.POST.get("xinxi_riqi")
-
         xinxi_jianjie_yn = request.POST.get("jianjie_yn")
         if xinxi_jianjie_yn == "on":
             xinxi_jianjie_yn = 1
         else:
             xinxi_jianjie_yn = 0
         xinxi_jianjie = request.POST.get("xinxi_jianjie")
-
         xinxi_tupian_yn = request.POST.get("tupian_yn")
         if xinxi_tupian_yn == "on":
             xinxi_tupian_yn = 1
@@ -184,14 +180,14 @@ def chanpin_xiugai(request):
         xinxi_tupian = request.POST.get("xinxi_tupian")
 
         xinxi_neirong = request.POST.get("xinxi_neirong")
-
-        # 0-id  1-user_name  2-user_password 3-fenzu_id  4-add_date  5-beizhu
         curson = connection.cursor()
         sql = "update cp set xinxi_lxid1=%s,xinxi_biaoti='%s',xinxi_riqi='%s',xinxi_jianjie_yn=%s,xinxi_jianjie='%s'," \
               "xinxi_tupian_yn=%s,xinxi_tupian='%s',xinxi_neirong='%s' where id=%s" % \
-              (xinxi_lxid, xinxi_biaoti, xinxi_riqi, xinxi_jianjie_yn, xinxi_jianjie, xinxi_tupian_yn, xinxi_tupian,xinxi_neirong,id)
+              (xinxi_lxid, xinxi_biaoti, xinxi_riqi, xinxi_jianjie_yn, xinxi_jianjie, xinxi_tupian_yn, xinxi_tupian,
+               xinxi_neirong, id)
         curson.execute(sql)
         return redirect("/chanpin_list/%s" % dijiye)
+
 
 # 产品 删除
 # 【xinwen_fenlei】 0-id  1-caidan_mingcheng  2-caidan_lujing 3-caidan_jibie  4-caidan_suoshu  5-paixu_id
@@ -219,23 +215,13 @@ def chanpin_list(request, dijiye):
     sql_zongshuju = "select count(1) from cp"
     cursor_zongshuju.execute(sql_zongshuju)
     zongshuju = cursor_zongshuju.fetchone()[0]
-    print("总的数据= %s 条" % zongshuju)  # 12
-
     meiye = 5
     yeshu = math.ceil(zongshuju / meiye)
-
-    print("每页数据 =%s 条" % meiye)
-    print("有多少页 =%s " % yeshu)
-
     cursor = connection.cursor()
     # sql = "select * from kecheng"
     sql = "select * from cp order by id desc limit %s,%s" % (int(meiye) * int(dijiye), meiye)
-    print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
-    # for row in rows:
-    #    print(row)
-
     biaoge = ''
     biaoge = biaoge + '<table width="100%" border="0" cellspacing="1" cellpadding="5"  align="center" bgcolor="#F6F6F6">'
     biaoge = biaoge + '<tr>'
@@ -246,7 +232,6 @@ def chanpin_list(request, dijiye):
     biaoge = biaoge + '<td bgcolor="#E0F3FF"  width="20%">缩略图</td>'
     biaoge = biaoge + '<td bgcolor="#E0F3FF"  width="10%">操作</td>'
     biaoge = biaoge + '</tr>'
-
     for row in rows:
         tmp_leixing = ""
 
@@ -254,10 +239,8 @@ def chanpin_list(request, dijiye):
         if row[5] == 1:
             tmp_tuijian = "有"
             tmp_tuijian = row[6]
-        print(tmp_tuijian)
-
-        tmp_tupian =""
-        if  row[7] == 1:
+        tmp_tupian = ""
+        if row[7] == 1:
             tmp_tupian = "有"
             tmp_tupian = "<img src='/%s' height='80px'>" % row[8]
 
@@ -272,8 +255,8 @@ def chanpin_list(request, dijiye):
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % tmp_tuijian
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % tmp_tupian
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'
-        biaoge = biaoge + '<a href="/chanpin_xiugai?id=%s&dijiye=%s">修改</a>&nbsp;&nbsp;' % (row[0],dijiye)
-        biaoge = biaoge + '| &nbsp;&nbsp;<a href="/chanpin_del?id=%s&dijiye=%s">删除</a>' % (row[0],dijiye)
+        biaoge = biaoge + '<a href="/chanpin_xiugai?id=%s&dijiye=%s">修改</a>&nbsp;&nbsp;' % (row[0], dijiye)
+        biaoge = biaoge + '| &nbsp;&nbsp;<a href="/chanpin_del?id=%s&dijiye=%s">删除</a>' % (row[0], dijiye)
         biaoge = biaoge + '</td>'
         biaoge = biaoge + '</tr>'
     biaoge = biaoge + '</table>'
@@ -294,7 +277,7 @@ def chanpin_list(request, dijiye):
 
     caidan = caidan + "&nbsp;&nbsp;总数据：%s | " % zongshuju
     caidan = caidan + "每页：%s | " % meiye
-    caidan = caidan + "当前页数：%s | " % (int(dijiye)+1)
+    caidan = caidan + "当前页数：%s | " % (int(dijiye) + 1)
     caidan = caidan + "总页数：%s  " % yeshu
     caidan = caidan + ""
 
@@ -307,7 +290,7 @@ def chanpin_list(request, dijiye):
     return render(request, "houtai/chanpin/chanpin_list.html", context=neirong)
 
 
-#产品 评论 列表
+# 产品 评论 列表
 def chanpin_pinglun_list(request, dijiye):
     print("第几页=%s" % dijiye)
     cursor_zongshuju = connection.cursor()
@@ -348,21 +331,20 @@ def chanpin_pinglun_list(request, dijiye):
         huiyuan = tmp_huiyuan[1]
 
         biaoge = biaoge + '<tr>'
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' %  row[5] #评论时间
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' %  huiyuan   #会员信息
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' %  row[3]  #内容
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[5]  # 评论时间
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % huiyuan  # 会员信息
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[3]  # 内容
 
-
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">' #订单状态 + 处理
-        #1在购物车，还没下单；2下单，没有付款；3已经付款，还没发货；4已经发货，等待客户收货；5客户收货
-        #biaoge = biaoge + str(row[7])
-        if row[6]==0:
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">'  # 订单状态 + 处理
+        # 1在购物车，还没下单；2下单，没有付款；3已经付款，还没发货；4已经发货，等待客户收货；5客户收货
+        # biaoge = biaoge + str(row[7])
+        if row[6] == 0:
             biaoge = biaoge + "0-等待审核 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;"
             biaoge = biaoge + '<a href="/chanpin_pinglun_chuli?id=%s&dijiye=%s">评论处理</a>' % (row[0], dijiye)
-        if row[6]==1:
+        if row[6] == 1:
             biaoge = biaoge + "1-审核拒绝 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;"
             biaoge = biaoge + '<a href="/chanpin_pinglun_chuli?id=%s&dijiye=%s">评论处理</a>' % (row[0], dijiye)
-        if row[6]==2:
+        if row[6] == 2:
             biaoge = biaoge + "2-审核通过 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;"
             biaoge = biaoge + '<a href="/chanpin_pinglun_chuli?id=%s&dijiye=%s">评论处理</a>' % (row[0], dijiye)
 
@@ -388,7 +370,7 @@ def chanpin_pinglun_list(request, dijiye):
 
     caidan = caidan + "&nbsp;&nbsp;总数据：%s | " % zongshuju
     caidan = caidan + "每页：%s | " % meiye
-    caidan = caidan + "当前页数：%s | " % (int(dijiye)+1)
+    caidan = caidan + "当前页数：%s | " % (int(dijiye) + 1)
     caidan = caidan + "总页数：%s  " % yeshu
     caidan = caidan + ""
 
@@ -400,10 +382,10 @@ def chanpin_pinglun_list(request, dijiye):
 
     return render(request, "houtai/chanpin/chanpin_pinglun_list.html", context=neirong)
 
-#产品 评论 处理
+
+# 产品 评论 处理
 def chanpin_pinglun_chuli(request):
     if request.method == "GET":
-
         id = request.GET.get("id")
         dijiye = request.GET.get("dijiye")
         curson = connection.cursor()
@@ -411,8 +393,8 @@ def chanpin_pinglun_chuli(request):
         info = curson.fetchone()
 
         neirong = {
-            "id":id,
-            "dijiye":dijiye,
+            "id": id,
+            "dijiye": dijiye,
             "yn_shenhe": info[5],
             "shenhe_beizhu": info[6]
         }
@@ -434,6 +416,6 @@ def chanpin_pinglun_chuli(request):
         # 12-beizhu_fahuo  13-beizhu_caozuo  14-pinglun_yn  15-pinglun_id
         curson = connection.cursor()
         sql = "update cp_pinglun set yn_shenhe=%s,shenhe_beizhu='%s' where id=%s" % \
-              (yn_shenhe, shenhe_beizhu,id)
+              (yn_shenhe, shenhe_beizhu, id)
         curson.execute(sql)
         return redirect("/chanpin_pinglun_list/%s" % dijiye)

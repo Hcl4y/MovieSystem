@@ -9,6 +9,7 @@ import json
 
 import math
 
+
 def liuyan_del(request):
     if request.method == "GET":
         id = request.GET.get("id")
@@ -26,23 +27,14 @@ def liuyan_list(request, dijiye):
     sql_zongshuju = "select count(1) from liuyan"
     cursor_zongshuju.execute(sql_zongshuju)
     zongshuju = cursor_zongshuju.fetchone()[0]
-    print("总的数据= %s 条" % zongshuju)  # 12
-
     meiye = 5
     yeshu = math.ceil(zongshuju / meiye)
-
-    print("每页数据 =%s 条" % meiye)
-    print("有多少页 =%s " % yeshu)
-
     cursor = connection.cursor()
     # sql = "select * from kecheng"
     sql = "select * from liuyan order by id desc limit %s,%s" % (int(meiye) * int(dijiye), meiye)
     print(sql)
     cursor.execute(sql)
     rows = cursor.fetchall()  # 获取所有的数据
-    # for row in rows:
-    #    print(row)
-
     biaoge = ''
     biaoge = biaoge + '<table width="100%" border="0" cellspacing="1" cellpadding="5"  align="center" bgcolor="#F6F6F6">'
     biaoge = biaoge + '<tr>'
@@ -52,17 +44,15 @@ def liuyan_list(request, dijiye):
     biaoge = biaoge + '<td bgcolor="#E0F3FF"  width="40%">联系人/手机/邮箱</td>'
     biaoge = biaoge + '<td bgcolor="#E0F3FF"  width="10%">操作</td>'
     biaoge = biaoge + '</tr>'
-
     for row in rows:
         # 【liuyan】 0-id  1-xingming  2-dianhua 3-youxiang  4-zhuti  5-neirong  6-add_date
-
         biaoge = biaoge + '<tr>'
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[6]
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[4]
         biaoge = biaoge + '<td bgcolor="#FFFFFF">%s</td>' % row[5]
-        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s/%s/%s</td>' % (row[1],row[2],row[3])
+        biaoge = biaoge + '<td bgcolor="#FFFFFF">%s/%s/%s</td>' % (row[1], row[2], row[3])
         biaoge = biaoge + '<td bgcolor="#FFFFFF">'
-        biaoge = biaoge + '<a href="/liuyan_del?id=%s&dijiye=%s">删除</a>' % (row[0],dijiye)
+        biaoge = biaoge + '<a href="/liuyan_del?id=%s&dijiye=%s">删除</a>' % (row[0], dijiye)
         biaoge = biaoge + '</td>'
         biaoge = biaoge + '</tr>'
     biaoge = biaoge + '</table>'
@@ -83,7 +73,7 @@ def liuyan_list(request, dijiye):
 
     caidan = caidan + "&nbsp;&nbsp;总数据：%s | " % zongshuju
     caidan = caidan + "每页：%s | " % meiye
-    caidan = caidan + "当前页数：%s | " % (int(dijiye)+1)
+    caidan = caidan + "当前页数：%s | " % (int(dijiye) + 1)
     caidan = caidan + "总页数：%s  " % yeshu
     caidan = caidan + ""
 
